@@ -1,7 +1,7 @@
 SortBy
 ======
 
-An addon for Sublime Text 2 that sort selected text that are not supported by default. 
+An addon for Sublime Text 2 that sort selected text that are not present by default
 Currently there are:
 
 By length of the line (Reversed / Normal)
