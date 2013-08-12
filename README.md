@@ -14,7 +14,7 @@ By length of the line (Reversed / Normal)
 <b>Manual installation:</b>
 
 1) Find your local Sublime Text 2 Packages directory
-Example : C:\Users\\<USER_NAME>\AppData\Roaming\Sublime Text 2\Packages
+Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text 2\Packages
   
 2) Copy SortBy.sublime-package inside the Packages directory
 
