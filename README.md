@@ -26,4 +26,4 @@ Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text 2\Packages
 
 2) Go in the menu "Edit", then you should see "SortBy".
 
-3) Choose your option. (Either Reverse of normal)
+3) Choose your option. (Either Reverse or normal)
