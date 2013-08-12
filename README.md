@@ -6,7 +6,7 @@ An addon for Sublime Text 2 that sort selected text by length of the line.
 Manual installation:
 
 1) Find your local Sublime Text 2 Packages directory
-  Example : C:\Users\<USER_NAME>\AppData\Roaming\Sublime Text 2\Packages
+Example : C:\Users\<USER_NAME>\AppData\Roaming\Sublime Text 2\Packages
   
 2) Copy SortBy.sublime-package inside the Packages directory
 
