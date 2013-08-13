@@ -25,4 +25,4 @@ Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text 2\Packages
 
 3) Choose your option. (Either Reverse or normal).
 
-OR using the control palette (CRTL + SHIFT + P on windows) and enter SortBy.
+OR using the control palette (CTRL + SHIFT + P on windows) and enter SortBy.
