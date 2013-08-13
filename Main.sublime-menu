@@ -1,0 +1,28 @@
+    [
+        {
+            "id": "edit",  
+            "children":  
+            [ 
+                {
+                    "id": "sby", 
+                    "caption": "SortBy", 
+                    "children":  
+                    [
+                    {
+                        "id": "sbylf",
+                        "caption": "Length",
+                        "command": "sby",
+                        "args": {"sort": "length","reversed": false}
+                    },
+                    {
+                        "id": "sbylf",
+                        "caption": "Length (Reversed)",
+                        "command": "sby",
+                        "args": {"sort": "length","reversed": true}
+                    }
+                    ]
+                }
+
+            ] 
+        } 
+    ]
