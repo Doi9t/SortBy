@@ -20,7 +20,7 @@
                         "args": {"sort": "length","reversed": false}
                     },
                     {
-                        "caption": "SortBy: Length of line (Reversed)",
+                        "caption": "SortBy: Length of line (Descending)",
                         "command": "sby",
                         "args": {"sort": "length","reversed": true}
                     },
@@ -30,7 +30,7 @@
                         "args": {"sort": "integer","reversed": false}
                     },
                     {
-                        "caption": "SortBy: Number (Reversed)",
+                        "caption": "SortBy: Number (Descending)",
                         "command": "sby",
                         "args": {"sort": "integer","reversed": true}
                     }
