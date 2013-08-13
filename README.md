@@ -4,13 +4,13 @@ SortBy
 A plugin for Sublime Text 2 that sort selected text that are not present by default.
 
 Currently available (More type of sort are on development):
-<br>By length of the line (Reversed / Normal)
-
+<br>By length of lines (Reversed / Normal)
+<br>Sort list of number (one per line)
 
 -----
 <b>Manual installation:</b>
 
-1) Find your local Sublime Text 2 Packages directory.
+1) Find your local Sublime Text 2 Packages directory.<br>
 Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text 2\Packages
   
 2) Copy the SortBy directory inside the Packages directory.
