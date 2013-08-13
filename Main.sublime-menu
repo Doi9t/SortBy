@@ -1,22 +1,41 @@
 [
     {
-        "caption": "SortBy: Length of lines",
-        "command": "sby",
-        "args": {"sort": "length","reversed": false}
-    },
-    {
-        "caption": "SortBy: Length of line (Reversed)",
-        "command": "sby",
-        "args": {"sort": "length","reversed": true}
-    },
-    {
-        "caption": "SortBy: Number",
-        "command": "sby",
-        "args": {"sort": "integer","reversed": false}
-    },
-    {
-        "caption": "SortBy: Number (Reversed)",
-        "command": "sby",
-        "args": {"sort": "integer","reversed": true}
+        "caption": "Edit",
+        "mnemonic": "E",
+        "id": "edit",
+        "children":
+        [
+            {
+                "caption": "SortBy",
+                "mnemonic": "B",
+                "id": "sort-by",
+                "children":
+                [
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "SortBy: Length of lines",
+                        "command": "sby",
+                        "args": {"sort": "length","reversed": false}
+                    },
+                    {
+                        "caption": "SortBy: Length of line (Reversed)",
+                        "command": "sby",
+                        "args": {"sort": "length","reversed": true}
+                    },
+                    {
+                        "caption": "SortBy: Number",
+                        "command": "sby",
+                        "args": {"sort": "integer","reversed": false}
+                    },
+                    {
+                        "caption": "SortBy: Number (Reversed)",
+                        "command": "sby",
+                        "args": {"sort": "integer","reversed": true}
+                    }
+                ]
+            }
+        ]
     }
 ]
