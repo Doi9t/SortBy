@@ -1,7 +1,7 @@
 SortBy
 ======
 
-A plugin for Sublime Text 2 that sort selected text that are not present by default.
+A Sublime Text 2 plugin that allows you to sort text with methods that are not present by default.
 
 Currently available (More type of sort are on development):
 <br>By length of lines (Reversed / Normal)
