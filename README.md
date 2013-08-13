@@ -5,7 +5,7 @@ A plugin for Sublime Text 2 that sort selected text that are not present by defa
 
 Currently available (More type of sort are on development):
 <br>By length of lines (Reversed / Normal)
-<br>Sort list of number (one per line)
+<br>Sort list of number (Reversed / Normal)
 
 -----
 <b>Manual installation:</b>
