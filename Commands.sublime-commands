@@ -5,7 +5,7 @@
         "args": {"sort": "length","reversed": false}
     },
     {
-        "caption": "SortBy: Length of lines (Reversed)",
+        "caption": "SortBy: Length of lines (Descending)",
         "command": "sby",
         "args": {"sort": "length","reversed": true}
     }
