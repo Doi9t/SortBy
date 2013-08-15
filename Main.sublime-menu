@@ -23,16 +23,6 @@
                         "caption": "SortBy: Length of line (Descending)",
                         "command": "sby",
                         "args": {"sort": "length","reversed": true}
-                    },
-                    {
-                        "caption": "SortBy: Number",
-                        "command": "sby",
-                        "args": {"sort": "integer","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Number (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "integer","reversed": true}
                     }
                 ]
             }
