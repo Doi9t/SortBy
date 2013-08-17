@@ -4,7 +4,7 @@ SortBy
 A Sublime Text 2 plugin that allows you to sort text with methods that are not present by default.
 
 Currently available (More type of sort are on development):
-<br>By length of lines (Ascending / Descending)
+<br><b>By length of lines (Ascending / Descending)</b>
 	<br>&emsp;-Example of sort: (Ascending)
 	<p>
 		<br>&emsp;abandonments
@@ -33,7 +33,7 @@ Currently available (More type of sort are on development):
 	</p>
 
 
-<br>Sort list of number (Ascending / Descending)
+<br><b>Sort list of number (Ascending / Descending)</b>
 	<br>&emsp;-Example of sort: (Ascending)
 	<p>
 			<br>&emsp;38783
