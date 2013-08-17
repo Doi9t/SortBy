@@ -7,27 +7,27 @@ Currently available (More type of sort are on development):
 <br>By length of lines (Ascending / Descending)
 	<br>&emsp;-Example of sort: (Ascending)
 	<p>
-		&emsp;abandonments
-		&emsp;abandoned
-		&emsp;abamperes
-		&emsp;abampere
-		&emsp;abandoning
-		&emsp;abamps
-		&emsp;abas
-		&emsp;abandons
-		&emsp;abandonment
-		&emsp;abandon
+		<br>&emsp;abandonments
+		<br>&emsp;abandoned
+		<br>&emsp;abamperes
+		<br>&emsp;abampere
+		<br>&emsp;abandoning
+		<br>&emsp;abamps
+		<br>&emsp;abas
+		<br>&emsp;abandons
+		<br>&emsp;abandonment
+		<br>&emsp;abandon
 	&emsp;Will be sorted as:
-		&emsp;abas
-		&emsp;abamps
-		&emsp;abandon
-		&emsp;abampere
-		&emsp;abandons
-		&emsp;abandoned
-		&emsp;abamperes
-		&emsp;abandoning
-		&emsp;abandonment
-		&emsp;abandonments
+		<br>&emsp;abas
+		<br>&emsp;abamps
+		<br>&emsp;abandon
+		<br>&emsp;abampere
+		<br>&emsp;abandons
+		<br>&emsp;abandoned
+		<br>&emsp;abamperes
+		<br>&emsp;abandoning
+		<br>&emsp;abandonment
+		<br>&emsp;abandonments
 	</p>
 
 
