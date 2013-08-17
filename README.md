@@ -4,52 +4,60 @@ SortBy
 A Sublime Text 2 plugin that allows you to sort text with methods that are not present by default.
 
 Currently available:
-	<b>By length of lines (Ascending / Descending)</b>
-	<br>&emsp;-Example of sort: (Ascending)
-	<br>&emsp;abandonments
-	<br>&emsp;abandoned
-	<br>&emsp;abamperes
-	<br>&emsp;abampere
-	<br>&emsp;abandoning
-	<br>&emsp;abamps
-	<br>&emsp;abas
-	<br>&emsp;abandons
-	<br>&emsp;abandonment
-	<br>&emsp;abandon
+	<br><b>By length of lines (Ascending / Descending)</b>
+	<i>
+		<br>&emsp;-Example of sort: (Ascending)
+		<br>&emsp;abandonments
+		<br>&emsp;abandoned
+		<br>&emsp;abamperes
+		<br>&emsp;abampere
+		<br>&emsp;abandoning
+		<br>&emsp;abamps
+		<br>&emsp;abas
+		<br>&emsp;abandons
+		<br>&emsp;abandonment
+		<br>&emsp;abandon
+	</i>
 	<br>
 	<br>Will be sorted as:
-	<br>&emsp;abas
-	<br>&emsp;abamps
-	<br>&emsp;abandon
-	<br>&emsp;abampere
-	<br>&emsp;abandons
-	<br>&emsp;abandoned
-	<br>&emsp;abamperes
-	<br>&emsp;abandoning
-	<br>&emsp;abandonment
-	<br>&emsp;abandonments
+	<i>
+		<br>&emsp;abas
+		<br>&emsp;abamps
+		<br>&emsp;abandon
+		<br>&emsp;abampere
+		<br>&emsp;abandons
+		<br>&emsp;abandoned
+		<br>&emsp;abamperes
+		<br>&emsp;abandoning
+		<br>&emsp;abandonment
+		<br>&emsp;abandonments
+	</i>
 
 <br><b>Sort list of number (Ascending / Descending)</b>
-	&emsp;-Example of sort: (Ascending)
-	<br>&emsp;38783
-	<br>&emsp;47839807
-	<br>&emsp;-254
-	<br>&emsp;2634 cars
-	<br>&emsp;-19
-	<br>&emsp;decimals
-	<br>&emsp;32764726d
-	<br>&emsp;5
-	<br>&emsp;3476237465
-	<br>&emsp;2
+	<br>&emsp;-Example of sort: (Ascending)
+	<i>
+		<br>&emsp;38783
+		<br>&emsp;47839807
+		<br>&emsp;-254
+		<br>&emsp;2634 cars
+		<br>&emsp;-19
+		<br>&emsp;decimals
+		<br>&emsp;32764726d
+		<br>&emsp;5
+		<br>&emsp;3476237465
+		<br>&emsp;2
+	</i>
 	<br>
 	<br>Will be sorted as:
-	<br>&emsp;-255
-	<br>&emsp;-19
-	<br>&emsp;2
-	<br>&emsp;5
-	<br>&emsp;38783
-	<br>&emsp;47839807
-	<br>&emsp;3476237465
+	<i>
+		<br>&emsp;-255
+		<br>&emsp;-19
+		<br>&emsp;2
+		<br>&emsp;5
+		<br>&emsp;38783
+		<br>&emsp;47839807
+		<br>&emsp;3476237465
+	</i>
 
 Currently in development:
 <br>&emsp;Sort by octal
