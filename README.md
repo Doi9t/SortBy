@@ -17,7 +17,9 @@ Currently available (More type of sort are on development):
 		<br>&emsp;abandons
 		<br>&emsp;abandonment
 		<br>&emsp;abandon
+		<br>
 	<br>&emsp;Will be sorted as:
+		<br>
 		<br>&emsp;abas
 		<br>&emsp;abamps
 		<br>&emsp;abandon
@@ -34,24 +36,26 @@ Currently available (More type of sort are on development):
 <br>Sort list of number (Ascending / Descending)
 	<br>&emsp;-Example of sort: (Ascending)
 	<p>
-			&emsp;38783
-			&emsp;47839807
-			&emsp;-254
-			&emsp;2634 cars
-			&emsp;-19
-			&emsp;decimals
-			&emsp;32764726d
-			&emsp;5
-			&emsp;3476237465
-			&emsp;2
+			<br>&emsp;38783
+			<br>&emsp;47839807
+			<br>&emsp;-254
+			<br>&emsp;2634 cars
+			<br>&emsp;-19
+			<br>&emsp;decimals
+			<br>&emsp;32764726d
+			<br>&emsp;5
+			<br>&emsp;3476237465
+			<br>&emsp;2
+		<br>
 		<br>&emsp;Will be sorted as:
-			&emsp;-255
-			&emsp;-19
-			&emsp;2
-			&emsp;5
-			&emsp;38783
-			&emsp;47839807
-			&emsp;3476237465
+		<br>
+			<br>&emsp;-255
+			<br>&emsp;-19
+			<br>&emsp;2
+			<br>&emsp;5
+			<br>&emsp;38783
+			<br>&emsp;47839807
+			<br>&emsp;3476237465
 	</p>
 
 -----
