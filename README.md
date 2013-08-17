@@ -5,7 +5,54 @@ A Sublime Text 2 plugin that allows you to sort text with methods that are not p
 
 Currently available (More type of sort are on development):
 <br>By length of lines (Ascending / Descending)
-<!--<br>Sort list of number (Ascending / Descending)-->
+	<br>&emsp;-Example of sort: (Ascending)
+	<p>
+		&emsp;abandonments
+		&emsp;abandoned
+		&emsp;abamperes
+		&emsp;abampere
+		&emsp;abandoning
+		&emsp;abamps
+		&emsp;abas
+		&emsp;abandons
+		&emsp;abandonment
+		&emsp;abandon
+	&emsp;Will be sorted as:
+		&emsp;abas
+		&emsp;abamps
+		&emsp;abandon
+		&emsp;abampere
+		&emsp;abandons
+		&emsp;abandoned
+		&emsp;abamperes
+		&emsp;abandoning
+		&emsp;abandonment
+		&emsp;abandonments
+	</p>
+
+
+<br>Sort list of number (Ascending / Descending)
+	<br>&emsp;-Example of sort: (Ascending)
+	<p>
+			&emsp;38783
+			&emsp;47839807
+			&emsp;-254
+			&emsp;2634 cars
+			&emsp;-19
+			&emsp;decimals
+			&emsp;32764726d
+			&emsp;5
+			&emsp;3476237465
+			&emsp;2
+		&emsp;Will be sorted as:
+			&emsp;-255
+			&emsp;-19
+			&emsp;2
+			&emsp;5
+			&emsp;38783
+			&emsp;47839807
+			&emsp;3476237465
+	</p>
 
 -----
 <b>Manual installation:</b>

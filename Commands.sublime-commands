@@ -8,5 +8,15 @@
         "caption": "SortBy: Length of lines (Descending)",
         "command": "sby",
         "args": {"sort": "length","reversed": true}
+    },
+    {
+        "caption": "SortBy: Number",
+        "command": "sby",
+        "args": {"sort": "number","reversed": false}
+    },
+    {
+        "caption": "SortBy: Number (Descending)",
+        "command": "sby",
+        "args": {"sort": "number","reversed": true}
     }
 ]

@@ -1,5 +1,12 @@
 import sublime, sublime_plugin, string, re
 
+def isNombre(x):
+	try:
+		float(x)
+		return True;
+	except ValueError:
+		return False;
+
 class SbyCommand(sublime_plugin.TextCommand):
 	def run(self, edit, sort = 'length', reversed=False):
 		view = self.view;
@@ -15,29 +22,16 @@ class SbyCommand(sublime_plugin.TextCommand):
 				
 				conteneur = sorted(listeLignes, key=lambda str: len(str), reverse=reversed);
 				chaineFinale = ''.join(map(str, conteneur));
-				view.replace(edit, region, chaineFinale.strip());
+				view.replace(edit, region, chaineFinale);
 
-"""
-		if sort == 'integer':
+
+		if sort == 'number':
 			for region in view.sel():
 				ligne = view.line(region)  
-				contenue = view.substr(ligne);
-				conteneurTemp = contenue.split('\n');
-
-				for nombre in conteneurTemp:
-					isFloat = False;
-					isInteger = False;
-					
-					try:
-					   val = int(nombre);
-					   isInteger = True;
-					except ValueError:
-					   print("Pas integer => " + nombre);
-
-					try:
-					   val = float(nombre);
-					   isFloat = True;
-					except ValueError:
-					   print("Pas float => " + nombre);
-
-"""
+				contenue = view.substr(ligne).splitlines();
+				contenue  = [i for i in contenue if isNombre(i)]; #Enleve tout les non nombres
+				conteneur = sorted(contenue, key=float, reverse=reversed); #trie le tableau
+				conteneur = [str(x) + '\n' for x in conteneur]; #On ajoute \n a chaque element
+				conteneur[-1] = conteneur[-1][:-1]; #On enleve le \n du dernier element
+				chaineFinale = ''.join(map(str, conteneur));
+				view.replace(edit, region, chaineFinale);
