@@ -17,7 +17,7 @@ Currently available (More type of sort are on development):
 		<br>&emsp;abandons
 		<br>&emsp;abandonment
 		<br>&emsp;abandon
-	&emsp;Will be sorted as:
+	<br>&emsp;Will be sorted as:
 		<br>&emsp;abas
 		<br>&emsp;abamps
 		<br>&emsp;abandon
@@ -44,7 +44,7 @@ Currently available (More type of sort are on development):
 			&emsp;5
 			&emsp;3476237465
 			&emsp;2
-		&emsp;Will be sorted as:
+		<br>&emsp;Will be sorted as:
 			&emsp;-255
 			&emsp;-19
 			&emsp;2
