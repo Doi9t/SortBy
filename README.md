@@ -3,8 +3,8 @@ SortBy
 
 A Sublime Text 2 plugin that allows you to sort text with methods that are not present by default.
 
-Currently available (More type of sort are on development):
-<br><b>By length of lines (Ascending / Descending)</b>
+Currently available:
+	<b>By length of lines (Ascending / Descending)</b>
 	<br>&emsp;-Example of sort: (Ascending)
 	<br>&emsp;abandonments
 	<br>&emsp;abandoned
@@ -18,7 +18,6 @@ Currently available (More type of sort are on development):
 	<br>&emsp;abandon
 	<br>
 	<br>Will be sorted as:
-	<br>
 	<br>&emsp;abas
 	<br>&emsp;abamps
 	<br>&emsp;abandon
@@ -31,7 +30,7 @@ Currently available (More type of sort are on development):
 	<br>&emsp;abandonments
 
 <br><b>Sort list of number (Ascending / Descending)</b>
-	<br>&emsp;-Example of sort: (Ascending)
+	&emsp;-Example of sort: (Ascending)
 	<br>&emsp;38783
 	<br>&emsp;47839807
 	<br>&emsp;-254
@@ -44,7 +43,6 @@ Currently available (More type of sort are on development):
 	<br>&emsp;2
 	<br>
 	<br>Will be sorted as:
-	<br>
 	<br>&emsp;-255
 	<br>&emsp;-19
 	<br>&emsp;2
@@ -52,6 +50,10 @@ Currently available (More type of sort are on development):
 	<br>&emsp;38783
 	<br>&emsp;47839807
 	<br>&emsp;3476237465
+
+Currently in development:
+<br>&emsp;Sort by octal
+<br>&emsp;Sort by hexadecial
 
 -----
 <b>Manual installation:</b>
