@@ -12,11 +12,41 @@
     {
         "caption": "SortBy: Number",
         "command": "sby",
-        "args": {"sort": "number","reversed": false}
+        "args": {"sort": "decimal","reversed": false}
     },
     {
         "caption": "SortBy: Number (Descending)",
         "command": "sby",
-        "args": {"sort": "number","reversed": true}
+        "args": {"sort": "decimal","reversed": true}
+    },
+    {
+        "caption": "SortBy: Hexadecimal",
+        "command": "sby",
+        "args": {"sort": "hexadecimal","reversed": false}
+    },
+    {
+        "caption": "SortBy: Hexadecimal (Descending)",
+        "command": "sby",
+        "args": {"sort": "hexadecimal","reversed": true}
+    },
+    {
+        "caption": "SortBy: Octal",
+        "command": "sby",
+        "args": {"sort": "octal","reversed": false}
+    },
+    {
+        "caption": "SortBy: Octal (Descending)",
+        "command": "sby",
+        "args": {"sort": "octal","reversed": true}
+    },
+    {
+        "caption": "SortBy: Binary",
+        "command": "sby",
+        "args": {"sort": "binary","reversed": false}
+    },
+    {
+        "caption": "SortBy: Binary (Descending)",
+        "command": "sby",
+        "args": {"sort": "binary","reversed": true}
     }
 ]
