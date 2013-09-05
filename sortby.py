@@ -12,7 +12,7 @@ def estBase(x,base):
 def baseToInteger(x,base):
 	return int(x,base);
 
-class SbyCommand(sublime_plugin.TextCommand):
+class SrtbyliCommand(sublime_plugin.TextCommand):
 	def run(self, edit, sort = 'length', reversed=False):
 		view = self.view;
 
@@ -25,8 +25,8 @@ class SbyCommand(sublime_plugin.TextCommand):
 				conteneur = sorted(contenue, key=lambda str: baseToInteger(str, bases[sort]), reverse=reversed); 
 
 				if len(conteneur) != 0:
-					conteneur = [str(x) + '\n' for x in conteneur]; #On ajoute \n a chaque element
-					conteneur[-1] = conteneur[-1][:-1]; #On enleve le \n du dernier element
+					conteneur = [str(x) + '\n' for x in conteneur];
+					conteneur[-1] = conteneur[-1][:-1]; 
 					chaineFinale = ''.join(map(str, conteneur));
 					view.replace(edit, region, chaineFinale);
 				else:

@@ -1,68 +1,74 @@
 [
     {
-        "caption": "Edit",
-        "mnemonic": "E",
-        "id": "edit",
+        "caption": "Tools",
+        "mnemonic": "T",
+        "id": "tools",
         "children":
         [
             {
-                "caption": "SortBy",
-                "mnemonic": "B",
-                "id": "sort-by",
+                "caption": "Doi9t",
+                "mnemonic": "d",
+                "id": "menu_doi9t",
                 "children":
                 [
+
                     {
-                        "caption": "-"
-                    },
-                    {
-                        "caption": "SortBy: Length of lines",
-                        "command": "sby",
-                        "args": {"sort": "length","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Length of line (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "length","reversed": true}
-                    },
-                    {
-                        "caption": "SortBy: Number",
-                        "command": "sby",
-                        "args": {"sort": "decimal","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Number (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "decimal","reversed": true}
-                    },
-                    {
-                        "caption": "SortBy: Hexadecimal",
-                        "command": "sby",
-                        "args": {"sort": "hexadecimal","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Hexadecimal (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "hexadecimal","reversed": true}
-                    },
-                    {
-                        "caption": "SortBy: Octal",
-                        "command": "sby",
-                        "args": {"sort": "octal","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Octal (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "octal","reversed": true}
-                    },
-                    {
-                        "caption": "SortBy: Binary",
-                        "command": "sby",
-                        "args": {"sort": "binary","reversed": false}
-                    },
-                    {
-                        "caption": "SortBy: Binary (Descending)",
-                        "command": "sby",
-                        "args": {"sort": "binary","reversed": true}
+                        "caption": "SortBy",
+                        "mnemonic": "s",
+                        "id": "menu_doi9t_sb",
+                        "children":
+                        [
+                            {
+                                "caption": "SortBy: Length of lines",
+                                "command": "srtbyli",
+                                "args": {"sort": "length","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: Length of line (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "length","reversed": true}
+                            },
+                            {
+                                "caption": "SortBy: Number",
+                                "command": "srtbyli",
+                                "args": {"sort": "decimal","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: Number (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "decimal","reversed": true}
+                            },
+                            {
+                                "caption": "SortBy: Hexadecimal",
+                                "command": "srtbyli",
+                                "args": {"sort": "hexadecimal","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: Hexadecimal (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "hexadecimal","reversed": true}
+                            },
+                            {
+                                "caption": "SortBy: Octal",
+                                "command": "srtbyli",
+                                "args": {"sort": "octal","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: Octal (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "octal","reversed": true}
+                            },
+                            {
+                                "caption": "SortBy: Binary",
+                                "command": "srtbyli",
+                                "args": {"sort": "binary","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: Binary (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "binary","reversed": true}
+                            }
+                        ]
                     }
                 ]
             }
