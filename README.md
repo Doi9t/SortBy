@@ -4,12 +4,16 @@ SortBy
 A Sublime Text 2 plugin that allows you to sort lines with methods that are not presents by default.
 
 <br>Sorting methods available:
-<br><b>By length of lines (Ascending / Descending)</b>
-<br><b>Sort a list of number (Ascending / Descending)</b>
-<br><b>Sort a list of binary number (Ascending / Descending)</b>
-<br><b>Sort a list of octal number (Ascending / Descending)</b>
-<br><b>Sort a list of hexadecimal number (Ascending / Descending)</b>
-<br>&emsp;- You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html).
+<br><b>Sort by the length of lines (Ascending / Descending)</b>
+<br><b>Sort lines of text alphabetically (Ascending / Descending)</b>
+<br><b>Sort numbers numerically (Ascending / Descending)</b>
+<ul>
+<li>Binary</li>
+<li>Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))</li>
+<li>Integer</li>
+<li>Octal</li>
+</ul> 
+
 
 ======
 <b>Manual installation:</b>
