@@ -10,6 +10,16 @@
         "args": {"sort": "length","reversed": true}
     },
     {
+        "caption": "SortBy: Alphabetically",
+        "command": "srtbyli",
+        "args": {"sort": "string","reversed": false}
+    },
+    {
+        "caption": "SortBy: Alphabetically (Descending)",
+        "command": "srtbyli",
+        "args": {"sort": "string","reversed": true}
+    },
+    {
         "caption": "SortBy: Number",
         "command": "srtbyli",
         "args": {"sort": "decimal","reversed": false}

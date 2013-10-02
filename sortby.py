@@ -1,6 +1,6 @@
 import sublime, sublime_plugin, string
 
-bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16}
+bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16};
 
 def estBase(x,base):
     try:
@@ -40,6 +40,20 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 					listeLignes[-1] += '\n';
 				
 				conteneur = sorted(listeLignes, key=lambda str: len(str), reverse=reversed);
+				if len(conteneur) != 0:
+					chaineFinale = ''.join(map(str, conteneur));
+					view.replace(edit, region, chaineFinale);
+				else:
+					print("SortBy error: No string found !");
+
+
+			if sort == 'string':
+				listeLignes = view.substr(ligne).splitlines(True);
+				#Pour le dernier mot
+				if listeLignes[-1][-1] != '\n':
+					listeLignes[-1] += '\n';
+				
+				conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
 				if len(conteneur) != 0:
 					chaineFinale = ''.join(map(str, conteneur));
 					view.replace(edit, region, chaineFinale);
