@@ -33,27 +33,17 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 					print("SortBy error: No number found !");
 
 
-			if sort == 'length':
+			if sort == 'length' or sort == 'string':
 				listeLignes = view.substr(ligne).splitlines(True);
 				#Pour le dernier mot
 				if listeLignes[-1][-1] != '\n':
 					listeLignes[-1] += '\n';
 				
-				conteneur = sorted(listeLignes, key=lambda str: len(str), reverse=reversed);
-				if len(conteneur) != 0:
-					chaineFinale = ''.join(map(str, conteneur));
-					view.replace(edit, region, chaineFinale);
+				if sort == 'length':
+					conteneur = sorted(listeLignes, key=lambda str: len(str), reverse=reversed);
 				else:
-					print("SortBy error: No string found !");
-
-
-			if sort == 'string':
-				listeLignes = view.substr(ligne).splitlines(True);
-				#Pour le dernier mot
-				if listeLignes[-1][-1] != '\n':
-					listeLignes[-1] += '\n';
+					conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
 				
-				conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
 				if len(conteneur) != 0:
 					chaineFinale = ''.join(map(str, conteneur));
 					view.replace(edit, region, chaineFinale);
