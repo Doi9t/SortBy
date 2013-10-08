@@ -13,9 +13,9 @@ def baseToInteger(x, base):
 	return int(x,base);
 
 def removeNewLine(x):
-	for item in xrange(x.count(u'\n')):
+	for item in range(0, x.count(u'\n')):
 		x.remove(u'\n');
-	for item in xrange(x.count(u'\r')):
+	for item in range(0, x.count(u'\r')):
 		x.remove(u'\r');
 
 
