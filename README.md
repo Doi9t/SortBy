@@ -1,7 +1,7 @@
 SortBy
 ======
 
-A Sublime Text 2 plugin that allows you to sort lines with methods that are not presents by default.
+A Sublime Text [2 or 3] plugin that allows you to sort lines with methods that are not presents by default.
 
 <br>Sorting methods available:
 <br><b>Sort by the length of lines (Ascending / Descending)</b>
@@ -18,12 +18,12 @@ A Sublime Text 2 plugin that allows you to sort lines with methods that are not 
 ======
 <b>Manual installation:</b>
 
-1) Find your local Sublime Text 2 Packages directory.<br>
-Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text 2\Packages
+1) Find your local Sublime Text [2 or 3] Packages directory.<br>
+Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text [2 or 3]\Packages
   
 2) Copy the SortBy directory inside the Packages directory.
 
-3) Restart Sublime Text 2 and enjoy !
+3) Restart Sublime Text and enjoy !
 
 <b>How to use:</b>
 
