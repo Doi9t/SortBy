@@ -1,7 +1,7 @@
 SortBy
 ======
 
-A Sublime Text [2 or 3] plugin that allows you to sort lines with methods that are not presents by default.
+A Sublime Text plugin that allows you to sort lines with methods that are not presents by default.
 
 <br>Sorting methods available:
 <br><b>Sort by the length of lines (Ascending / Descending)</b>
