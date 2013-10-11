@@ -55,7 +55,8 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 					conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
 
 				if len(conteneur) != 0:
-					chaineFinale = ''.join(map(str, conteneur));
+
+					chaineFinale = ''.join(conteneur);
 					view.replace(edit, region, chaineFinale);
 				else:
 					print("SortBy error: No string found !");
