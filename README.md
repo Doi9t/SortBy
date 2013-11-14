@@ -29,7 +29,7 @@ Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text [2 or 3]\Packages
 
 1) Select the text you want to sort.
 
-2) Go in the menu "Tools", Doi9t then you should see "SortBy".
+2) Go in the menu "Tools", "Doi9t's packages" then you should see "SortBy".
 
 3) Choose your option. (Either Reverse or normal).
 
