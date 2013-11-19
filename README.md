@@ -4,6 +4,7 @@ SortBy
 A Sublime Text plugin that allows you to sort lines with methods that are not presents by default.
 
 <br>Sorting methods available:
+<br><b>Natural order</b>
 <br><b>Sort by the length of lines (Ascending / Descending)</b>
 <br><b>Sort lines of text alphabetically (Ascending / Descending)</b>
 <br><b>Sort numbers numerically (Ascending / Descending)</b>
