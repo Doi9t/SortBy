@@ -49,7 +49,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				idx = 0;
 				obj = [];
 				for line in contenue:
-					number = re.findall(r'\d+', line);
+					number = re.findall(r'^-?[0-9]+$', line);
 
 					if len(number) > 0: #Ok
 						obj.append(SortingObj(line, number[0]));
