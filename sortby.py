@@ -18,6 +18,8 @@ def removeNewLine(x):
 	for item in range(0, x.count(u'\r')):
 		x.remove(u'\r');
 
+#Thanks to Ned Batchelder for this function
+#http://nedbatchelder.com/blog/200712/human_sorting.html
 def sort_naturel(liste): 
     convertion = lambda e: int(e) if e.isdigit() else e.lower();
     key1 = lambda key: [ convertion(g) for g in re.split('([0-9]+)', key) ];
