@@ -39,14 +39,24 @@
                                 "args": {"sort": "string","reversed": true}
                             },
                             {
-                                "caption": "SortBy: Number",
+                                "caption": "SortBy: List of Number without any characters",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimal","reversed": false}
                             },
                             {
-                                "caption": "SortBy: Number (Descending)",
+                                "caption": "SortBy: List of Number without any characters (Descending)",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimal","reversed": true}
+                            },
+                            {
+                                "caption": "SortBy: List of numbers with surrounding characters",
+                                "command": "srtbyli",
+                                "args": {"sort": "decimalLetter","reversed": false}
+                            },
+                            {
+                                "caption": "SortBy: List of numbers with surrounding characters (Descending)",
+                                "command": "srtbyli",
+                                "args": {"sort": "decimalLetter","reversed": true}
                             },
                             {
                                 "caption": "SortBy: Hexadecimal",
