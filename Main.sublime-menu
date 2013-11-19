@@ -39,12 +39,12 @@
                                 "args": {"sort": "string","reversed": true}
                             },
                             {
-                                "caption": "SortBy: List of Number without any characters",
+                                "caption": "SortBy: List of numbers without any characters",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimal","reversed": false}
                             },
                             {
-                                "caption": "SortBy: List of Number without any characters (Descending)",
+                                "caption": "SortBy: List of numbers without any characters (Descending)",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimal","reversed": true}
                             },
