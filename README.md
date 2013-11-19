@@ -10,7 +10,7 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <ul>
 <li>Binary</li>
 <li>Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))</li>
-<li>Integer with and without surrounding characters</li>
+<li>Integer with and without surrounding caracters</li>
 <li>Octal</li>
 </ul> 
 

@@ -68,7 +68,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
 
 			#Sort numbers
-			if sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary': 
+			if  sort == 'octal' or sort == 'hexadecimal' or sort == 'binary': 
 				contenue = view.substr(ligne).splitlines();
 				contenue  = [i for i in contenue if isBase(i, bases[sort])]; 
 				removeNewLine(contenue);

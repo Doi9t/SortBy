@@ -39,22 +39,12 @@
                                 "args": {"sort": "string","reversed": true}
                             },
                             {
-                                "caption": "SortBy: List of numbers without any characters",
-                                "command": "srtbyli",
-                                "args": {"sort": "decimal","reversed": false}
-                            },
-                            {
-                                "caption": "SortBy: List of numbers without any characters (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "decimal","reversed": true}
-                            },
-                            {
-                                "caption": "SortBy: List of numbers with surrounding characters",
+                                "caption": "SortBy: List of numbers with or without surrounding caracters",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimalLetter","reversed": false}
                             },
                             {
-                                "caption": "SortBy: List of numbers with surrounding characters (Descending)",
+                                "caption": "SortBy: List of numbers with or without surrounding caracters (Descending)",
                                 "command": "srtbyli",
                                 "args": {"sort": "decimalLetter","reversed": true}
                             },
