@@ -18,6 +18,11 @@ def removeNewLine(x):
 	for item in range(0, x.count(u'\r')):
 		x.remove(u'\r');
 
+def sort_naturel(liste): 
+    convertion = lambda e: int(e) if e.isdigit() else e.lower();
+    key1 = lambda key: [ convertion(g) for g in re.split('([0-9]+)', key) ];
+    return sorted(liste, key = key1)
+
 class SortingObj(object):
 	def __init__(self, line, number):
 		self.line = str(line);
@@ -66,7 +71,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				chaineFinale = ''.join(conteneur);
 				view.replace(edit, region, chaineFinale);
 
-
 			#Sort numbers
 			if  sort == 'octal' or sort == 'hexadecimal' or sort == 'binary': 
 				contenue = view.substr(ligne).splitlines();
@@ -83,8 +87,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				else:
 					print("SortBy error: No number found !");
 
-			#Sort strings
-			if sort == 'length' or sort == 'string':
+
+
+			#Sort strings and natural order
+			if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
 				listeLignes = view.substr(ligne).splitlines(True);
 
 				if listeLignes[-1][-1] != '\n':
@@ -94,11 +100,13 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				
 				if sort == 'length':
 					conteneur = sorted(listeLignes, key=lambda str: len(str), reverse=reversed);
-				else:
+				elif sort == 'string':
 					conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
+				elif sort == 'naturalOrder':
+					conteneur = sort_naturel(listeLignes);
+					print(conteneur);
 
 				if len(conteneur) != 0:
-
 					chaineFinale = ''.join(conteneur);
 					view.replace(edit, region, chaineFinale);
 				else:

@@ -1,5 +1,10 @@
 [
     {
+        "caption": "SortBy: Natural order",
+        "command": "srtbyli",
+        "args": {"sort": "naturalOrder","reversed": false}
+    },
+    {
         "caption": "SortBy: Length of lines",
         "command": "srtbyli",
         "args": {"sort": "length","reversed": false}
