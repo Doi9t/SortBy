@@ -6,11 +6,11 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <br>Sorting methods available:
 <br><b>Sort by the length of lines (Ascending / Descending)</b>
 <br><b>Sort lines of text alphabetically (Ascending / Descending)</b>
-<br><b>Sort numbers numerically with and without surrounding characters (Ascending / Descending)</b>
+<br><b>Sort numbers numerically (Ascending / Descending)</b>
 <ul>
 <li>Binary</li>
 <li>Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))</li>
-<li>Integer</li>
+<li>Integer with and without surrounding characters</li>
 <li>Octal</li>
 </ul> 
 
