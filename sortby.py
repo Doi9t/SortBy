@@ -103,7 +103,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 					conteneur = sorted(listeLignes, key=lambda str: str.lower(), reverse=reversed);
 				elif sort == 'naturalOrder':
 					conteneur = sort_naturel(listeLignes);
-					print(conteneur);
 
 				if len(conteneur) != 0:
 					chaineFinale = ''.join(conteneur);
