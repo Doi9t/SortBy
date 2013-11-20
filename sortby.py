@@ -26,14 +26,17 @@ def sort_naturel(liste):
     return sorted(liste, key = key1)
 
 class SortingObj(object):
-	def __init__(self, line, number):
-		self.line = str(line);
-		self.number = int(number);
-
+	def __init__(self, line, number, base):
+		self.line = str(line).strip();
+		self.number = number;
+		self.base = base;
 	def getLine(self):
 		return self.line;
 	def getNumber(self):
-		return self.number;
+		if self.number == 0:
+			return 0;
+		else:
+			return baseToInteger(self.number, bases[self.base]);
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
 	def run(self, edit, sort = 'length', reversed=False):
@@ -44,7 +47,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 			ligne = view.line(region);
 
 			#Sort numbers with letters
-			if sort == 'decimalLetter':
+			if sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
 				contenue = view.substr(ligne).splitlines(True);
 
 				if contenue[-1][-1] != '\n':
@@ -56,12 +59,20 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				idx = 0;
 				obj = [];
 				for line in contenue:
-					number = re.findall(r'[+-]?\d+(?:\.\d+)?', line);
+					number = '';
+					if sort == 'decimal':
+						number = re.findall(r'[+-]?\d+(?:\.\d+)?', line); 
+					if sort == 'octal':
+						number = re.findall(r'[0-7]+', line);
+					if sort == 'hexadecimal':
+						number = re.findall(r'[0-9a-fA-F]+', line);
+					if sort == 'binary':
+						number = re.findall(r'[01]+', line);
 
 					if len(number) > 0: #Ok
-						obj.append(SortingObj(line, number[0]));
+						obj.append(SortingObj(line, number[0], sort));
 					else: #No number found
-						obj.append(SortingObj(line, 0));
+						obj.append(SortingObj(line, 0, sort));
 
 					idx = idx + 1;
 
@@ -70,27 +81,13 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				for line in obj:
 					conteneur.append(line.getLine());
 
-				chaineFinale = ''.join(conteneur);
-				view.replace(edit, region, chaineFinale);
-
-			#Sort numbers
-			if  sort == 'octal' or sort == 'hexadecimal' or sort == 'binary': 
-				contenue = view.substr(ligne).splitlines();
-				contenue  = [i for i in contenue if isBase(i, bases[sort])]; 
-				removeNewLine(contenue);
-				conteneur = sorted(contenue, key=lambda str: baseToInteger(str, bases[sort]), reverse=reversed); 
-
 				if len(conteneur) != 0:
 					conteneur = [str(x) + '\n' for x in conteneur];
 					conteneur[-1] = conteneur[-1][:-1];
-					chaineFinale = ''.join(conteneur);
-					view.replace(edit, region, chaineFinale);
 
-				else:
-					print("SortBy error: No number found !");
-
-
-
+				chaineFinale = ''.join(conteneur);
+				view.replace(edit, region, chaineFinale);
+				
 			#Sort strings and natural order
 			if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
 				listeLignes = view.substr(ligne).splitlines(True);

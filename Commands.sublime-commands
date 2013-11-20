@@ -25,14 +25,14 @@
         "args": {"sort": "string","reversed": true}
     },
     {
-        "caption": "SortBy: List of numbers with or without surrounding caracters",
+        "caption": "SortBy: List of numbers",
         "command": "srtbyli",
-        "args": {"sort": "decimalLetter","reversed": false}
+        "args": {"sort": "decimal","reversed": false}
     },
     {
-        "caption": "SortBy: List of numbers with or without surrounding caracters (Descending)",
+        "caption": "SortBy: List of numbers (Descending)",
         "command": "srtbyli",
-        "args": {"sort": "decimalLetter","reversed": true}
+        "args": {"sort": "decimal","reversed": true}
     },
     {
         "caption": "SortBy: Hexadecimal",
