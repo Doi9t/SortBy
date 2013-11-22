@@ -16,7 +16,7 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <li>Octal</li>
 </ul>
 
-<br>Feature available:
+<br>Features availables:
 <ul>
 <li>Able to sort the entire file (when there is no selection)</li>
 </ul>
