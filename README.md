@@ -8,7 +8,7 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <br><b>Sort by the length of lines (Ascending / Descending)</b>
 <br><b>Sort lines of text alphabetically (Ascending / Descending)</b>
 <br><b>Sort numbers numerically with and without surrounding caracters (Ascending / Descending)</b>
-<h1>This sorting method can sort:</h1>
+This sorting method can sort:
 <ul>
 <li>Binary</li>
 <li>Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))</li>
