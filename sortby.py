@@ -1,5 +1,7 @@
 import sublime, sublime_plugin, string, re
 
+bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16};
+
 #Thanks to Ned Batchelder for this function
 #http://nedbatchelder.com/blog/200712/human_sorting.html
 def sort_naturel(liste): 
@@ -8,16 +10,17 @@ def sort_naturel(liste):
     return sorted(liste, key = key1)
 
 class SortingObj(object):
-	def __init__(self, line, number):
+	def __init__(self, line, number, base):
 		self.line = str(line).strip();
 		self.number = number;
+		self.base = base;
 	def getLine(self):
 		return self.line;
 	def getNumber(self):
 		if self.number == 0:
 			return 0;
 		else:
-			return int(self.number, 10);
+			return int(self.number, bases[self.base]);
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
 	def sortNumbers(self, edit, region, contenue, sort, estSelect, reversed): #Sort numbers with letters
@@ -38,10 +41,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				number = re.findall(r'[01]+', line);
 
 			if len(number) > 0: #Ok
-				obj.append(SortingObj(line, number[0]));
+				obj.append(SortingObj(line, number[0], sort));
 			else: #No number found
-				obj.append(SortingObj(line, 0));
-
+				obj.append(SortingObj(line, 0, sort));
+				
 			idx = idx + 1;
 
 		obj.sort(key=lambda x: x.getNumber(), reverse=reversed)
