@@ -14,7 +14,12 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <li>Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))</li>
 <li>Integer</li>
 <li>Octal</li>
-</ul> 
+</ul>
+
+<br>Feature available:
+<ul>
+<li>Able to sort the entire file (when there is no selection)</li>
+</ul>
 
 
 ======
