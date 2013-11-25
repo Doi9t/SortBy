@@ -25,12 +25,12 @@
         "args": {"sort": "string","reversed": true}
     },
     {
-        "caption": "SortBy: Numerically",
+        "caption": "SortBy: Integer",
         "command": "srtbyli",
         "args": {"sort": "decimal","reversed": false}
     },
     {
-        "caption": "SortBy: Numerically (Descending)",
+        "caption": "SortBy: Integer (Descending)",
         "command": "srtbyli",
         "args": {"sort": "decimal","reversed": true}
     },

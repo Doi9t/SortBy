@@ -26,7 +26,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 	def sortNumbers(self, edit, region, contenue, sort, estSelect, reversed): #Sort numbers with letters
 
 		conteneur = [];
-		idx = 0;
 		obj = [];
 
 		for line in contenue:
@@ -36,7 +35,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 			if sort == 'octal':
 				number = re.findall(r'[0-7]+', line);
 			if sort == 'hexadecimal':
-				number = re.findall(r'[0-9a-fA-F]+', line);
+				number = re.findall(r'(?:0[xX])?[0-9a-fA-F]+', line);
 			if sort == 'binary':
 				number = re.findall(r'[01]+', line);
 
@@ -44,8 +43,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 				obj.append(SortingObj(line, number[0], sort));
 			else: #No number found
 				obj.append(SortingObj(line, 0, sort));
-				
-			idx = idx + 1;
 
 		obj.sort(key=lambda x: x.getNumber(), reverse=reversed)
 
