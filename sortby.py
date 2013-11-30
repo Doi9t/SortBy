@@ -63,13 +63,21 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
 	def sortStrings(self, edit, region, contenue, sort, estSelect, reversed): #Sort strings and natural order
 
+		s = sublime.load_settings("SortBy.sublime-settings");
+
+
 		if contenue[-1][-1] != '\n':
 			contenue[-1] += '\n';
 
 		if sort == 'length':
 			conteneur = sorted(contenue, key=lambda str: len(str), reverse=reversed);
 		elif sort == 'string':
-			conteneur = sorted(contenue, key=lambda str: str.lower(), reverse=reversed);
+			
+			if s.get('case_sensitive'):
+				conteneur = sorted(contenue, reverse=reversed);
+			else:
+				conteneur = sorted(contenue, key=lambda str: str.lower(), reverse=reversed);
+
 		elif sort == 'naturalOrder':
 			conteneur = sort_naturel(contenue);
 
@@ -86,6 +94,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 			print("SortBy error: No string found !");
 
 	def run(self, edit, sort = 'length', reversed=False):
+
 		view = self.view;
 		lines = [];
 		
