@@ -18,6 +18,7 @@ A Sublime Text plugin that allows you to sort lines with methods that are not pr
 <br>Features availables:
 <ul>
 <li>Able to sort the entire file (when there is no selection)</li>
+<li>Case sensitivity option for the alphabetically sort (Editable in SortBy.sublime-settings)</li>
 </ul>
 
 
