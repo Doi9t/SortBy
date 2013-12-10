@@ -7,7 +7,22 @@ bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16};
 def sort_naturel(liste): 
     convertion = lambda e: int(e) if e.isdigit() else e.lower();
     key1 = lambda key: [ convertion(g) for g in re.split('([0-9]+)', key) ];
-    return sorted(liste, key = key1)
+    return sorted(liste, key = key1);
+
+def putEndLines(arr):
+	arr = [str(x) + '\n' for x in arr];
+	arr[-1] = arr[-1][:-1];
+	return arr;
+
+def writeToView(self, region, conteneur):
+	if len(conteneur) != 0:
+		if self.estSelect:
+			self.view.replace(self.edit, region, ''.join(putEndLines(conteneur)));
+		else:
+			self.view.erase(self.edit, sublime.Region(0, self.view.size()));
+			self.view.insert(self.edit, 0, ''.join(putEndLines(conteneur)));
+	else:
+		print("SortBy error: No string found !");
 
 class SortingObj(object):
 	def __init__(self, line, number, base):
@@ -23,8 +38,8 @@ class SortingObj(object):
 			return int(self.number, bases[self.base]);
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
-	def sortNumbers(self, edit, region, contenue, sort, estSelect, reversed): #Sort numbers with letters
 
+	def sortNumbers(self, region, contenue, sort): #Sort numbers with letters
 		conteneur = [];
 		obj = [];
 
@@ -44,75 +59,49 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 			else: #No number found
 				obj.append(SortingObj(line, 0, sort));
 
-		obj.sort(key=lambda x: x.getNumber(), reverse=reversed)
+		obj.sort(key=lambda x: x.getNumber(), reverse=self.reversed)
 
 		for line in obj:
 			conteneur.append(line.getLine());
 
-		if len(conteneur) != 0:
-			conteneur = [str(x) + '\n' for x in conteneur];
-			conteneur[-1] = conteneur[-1][:-1];
-			chaineFinale = ''.join(conteneur);
-		
-			if estSelect:
-				self.view.replace(edit, region, chaineFinale);
-			else:
-				self.view.erase(edit, sublime.Region(0, self.view.size()));
-				self.view.insert(edit, 0, chaineFinale);
+		writeToView(self, region, conteneur);
 
-
-	def sortStrings(self, edit, region, contenue, sort, estSelect, reversed): #Sort strings and natural order
-
-		s = sublime.load_settings("SortBy.sublime-settings");
-
-
-		if contenue[-1][-1] != '\n':
-			contenue[-1] += '\n';
-
+	def sortStrings(self, region, contenue, sort): #Sort strings and natural order
 		if sort == 'length':
-			conteneur = sorted(contenue, key=lambda str: len(str), reverse=reversed);
+			conteneur = sorted(contenue, key=lambda str: len(str), reverse=self.reversed);
+
 		elif sort == 'string':
-			
-			if s.get('case_sensitive'):
-				conteneur = sorted(contenue, reverse=reversed);
+			if self.settings.get('case_sensitive'):
+				conteneur = sorted(contenue, reverse=self.reversed);
 			else:
-				conteneur = sorted(contenue, key=lambda str: str.lower(), reverse=reversed);
+				conteneur = sorted(contenue, key=lambda str: str.lower(), reverse=self.reversed);
 
 		elif sort == 'naturalOrder':
 			conteneur = sort_naturel(contenue);
 
-		if len(conteneur) != 0:
-			conteneur[-1] = conteneur[-1][:-1];
-			chaineFinale = ''.join(conteneur);
-
-			if estSelect:
-				self.view.replace(edit, region, chaineFinale);
-			else:
-				self.view.erase(edit, sublime.Region(0, self.view.size()));
-				self.view.insert(edit, 0, chaineFinale);
-		else:
-			print("SortBy error: No string found !");
+		writeToView(self, region, conteneur);
 
 	def run(self, edit, sort = 'length', reversed=False):
-
-		view = self.view;
 		lines = [];
-		
-		if view.sel()[0].empty() and len(view.sel()) == 1: #No selection
-			lines = view.substr(sublime.Region(0, self.view.size())).splitlines(True);
-			
-			if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-				self.sortStrings(edit, view.sel()[-1].end(), lines, sort, False, reversed);
-			elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-				self.sortNumbers(edit, view.sel()[-1].end(), lines, sort, False, reversed);
-		else:
-			for region in view.sel():
-				lines = view.substr(region).splitlines(True);
+		self.edit = edit;
+		view = self.view;
+		self.reversed = reversed;
+		SrtbyliCommand.edit = edit;
+		self.settings = sublime.load_settings("SortBy.sublime-settings");
 
+		if view.sel()[0].empty() and len(view.sel()) == 1: #No selection
+			self.estSelect = False;
+			if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
+				self.sortStrings(view.sel()[-1].end(), [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != ''], sort);
+			elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
+				self.sortNumbers(view.sel()[-1].end(), [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != ''], sort);
+		else:
+			self.estSelect = True;
+			for region in view.sel():
 				if region.empty():
 					continue;
 				else:
 					if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-						self.sortStrings(edit, region, lines, sort, True, reversed);
+						self.sortStrings(region, [x for x in view.substr(region).splitlines() if x != ''], sort);
 					elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-						self.sortNumbers(edit, region, lines, sort, True, reversed);
+						self.sortNumbers(region, [x for x in view.substr(region).splitlines() if x != ''], sort);
