@@ -9,7 +9,7 @@
 - Sort lines of text alphabetically (Ascending / Descending)
 - Sort numbers numerically with and without surrounding caracters (Ascending / Descending)
     1. Binary
-    2. Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles (Ex, html))
+    2. Hexadecimal (You can sort a hexadecimal number of the form 0xFF or FF, but not other styles)
     3. Integer
     4. Octal
 ~~~
