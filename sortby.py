@@ -10,7 +10,7 @@ def sort_naturel(liste):
     return sorted(liste, key = key1);
 
 def putEndLines(arr):
-	arr = [str(x) + '\n' for x in arr];
+	arr = [unicode(x.encode('utf-8') + '\n', 'utf-8') + '\n' for x in arr];
 	arr[-1] = arr[-1][:-1];
 	return arr;
 
