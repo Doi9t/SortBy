@@ -11,10 +11,10 @@ def sort_naturel(liste):
     return sorted(liste, key = key1)
 
 def putEndLines(arr):
-    if sublime.version < 3000:
+    if int(sublime.version()) < 3000:
         arr = [unicode(x.encode('utf-8')) + '\n' for x in arr]
     else:
-        arr = [str(x.encode('utf-8'), 'utf-8') + '\n' for x in arr]
+        arr = [str(x.encode('utf-8'), encoding='utf-8') + '\n' for x in arr]
 
     arr[-1] = arr[-1][:-1]
     return arr
