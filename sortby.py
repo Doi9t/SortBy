@@ -12,7 +12,7 @@ def sort_naturel(liste):
 
 def putEndLines(arr):
     if int(sublime.version()) < 3000:
-        arr = [unicode(x.encode('utf-8')) + '\n' for x in arr]
+        arr = [unicode(x.encode('utf-8'), 'utf-8') + '\n' for x in arr]
     else:
         arr = [str(x.encode('utf-8'), encoding='utf-8') + '\n' for x in arr]
 
