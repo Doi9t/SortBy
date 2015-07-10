@@ -6,6 +6,7 @@
 ~~~
 - Natural order
 - Sort by the length of lines (Ascending / Descending)
+	-Can be sorted alphabetically (Ascending / Descending) (Editable in SortBy.sublime-settings)
 - Sort lines of text alphabetically (Ascending / Descending)
 - Sort numbers numerically with and without surrounding caracters (Ascending / Descending)
     1. Binary
@@ -16,7 +17,6 @@
 
 <br/>
 **Features availables:**
-
 ~~~
 1. Able to sort the entire file (when there is no selection)
 2. Case sensitivity option for the alphabetically sort (Editable in SortBy.sublime-settings)
@@ -24,7 +24,6 @@
 
 <br/>
 **Manual installation:**
-
 ~~~
 1) Find your local Sublime Text [2 or 3] Packages directory.
 Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text [2 or 3]\Packages
@@ -36,7 +35,6 @@ Example : C:\Users\USER_NAME\AppData\Roaming\Sublime Text [2 or 3]\Packages
 
 <br/>
 **How to use:**
-
 ~~~
 1) Select the text you want to sort.
 

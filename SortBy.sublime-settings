@@ -1,3 +1,5 @@
 {
-    "case_sensitive": false
-} 
+	"alphabetical_case_sensitive": false,
+	"length_alphabetically_enabled": false,
+	"length_alphabetically_reversed": false
+}
