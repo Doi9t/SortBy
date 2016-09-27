@@ -1,27 +1,25 @@
 [
     {
         "caption": "Tools",
-        "mnemonic": "T",
         "id": "tools",
+        "mnemonic": "t",
         "children":
         [
             {
                 "caption": "Doi9t's packages",
-                "mnemonic": "d",
                 "id": "menu_doi9t",
+                "mnemonic": "o",
                 "children":
                 [
 
                     {
                         "caption": "SortBy",
-                        "mnemonic": "s",
                         "id": "menu_doi9t_sb",
                         "children":
                         [
 
                             {
                             "caption": "Strings",
-                            "mnemonic": "s",
                             "id": "menu_doi9t_sb_str",
                             "children":
                             [
@@ -55,7 +53,6 @@
                             },
                             {
                             "caption": "Numbers",
-                            "mnemonic": "n",
                             "id": "menu_doi9t_sb_num",
                             "children":
                             [
