@@ -2,7 +2,6 @@
     {
         "caption": "Tools",
         "id": "tools",
-        "mnemonic": "t",
         "children":
         [
             {

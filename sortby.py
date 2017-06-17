@@ -1,15 +1,19 @@
 from __future__ import print_function
-import sublime, sublime_plugin, re
 from collections import defaultdict
+import re
+import unicode
+import sublime
+import sublime_plugin
 
-bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16}
+bases = {'binary' : 2, 'octal' : 8, 'decimal' : 10, 'hexadecimal' : 16}
 
 #Thanks to Ned Batchelder for this function
 #http://nedbatchelder.com/blog/200712/human_sorting.html
 def sort_naturel(liste):
     convertion = lambda e: int(e) if e.isdigit() else e.lower()
-    key1 = lambda key: [ convertion(g) for g in re.split('([0-9]+)', key) ]
-    return sorted(liste, key = key1)
+    key1 = lambda key: [convertion(g) for g in re.split('([0-9]+)', key)]
+    print(key1)
+    return sorted(liste, key=key1)
 
 def putEndLines(arr):
     if int(sublime.version()) < 3000:
@@ -40,10 +44,14 @@ class SortingObj(object):
     def getNumber(self):
         if self.number == 0:
             return 0
-        else:
-            return int(self.number, bases[self.base])
+        return int(self.number, bases[self.base])
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
+
+    def __init__(self):
+        self.reverse = False
+        self.estSelect = None
+        self.settings = None
 
     def sortNumbers(self, region, contenue, sort): #Sort numbers with letters
         conteneur = []
@@ -65,7 +73,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
             else: #No number found
                 obj.append(SortingObj(line, 0, sort))
 
-        obj.sort(key=lambda x: x.getNumber(), reverse=self.reversed)
+        obj.sort(key=lambda x: x.getNumber(), reverse=self.reverse)
 
         for line in obj:
             conteneur.append(line.getLine())
@@ -78,41 +86,40 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                 conteneur = defaultdict(list)
 
                 #Put all values in a defaultdict (Grouped by length)
-                for str in sorted(contenue, key=lambda str: len(str)) :
-                    conteneur[len(str)].append(str)
+                for string in sorted(contenue, key=len):
+                    conteneur[len(string)].append(string)
 
-                #Sort the groups alphabetically 
+                #Sort the groups alphabetically
                 for k, v in conteneur.items():
                     conteneur[k] = sorted(v, reverse=self.settings.get('length_alphabetically_reversed'))
 
                 #Sort the groups by length
-                conteneur = sorted(conteneur.items(), key=lambda t: t[0], reverse=self.reversed)
+                conteneur = sorted(conteneur.items(), key=lambda t: t[0], reverse=self.reverse)
 
                 conteneurTmp = []
                 for k, v in conteneur:
-                    for str in v:
-                        conteneurTmp.append(str)
-                conteneur = conteneurTmp;
+                    for string in v:
+                        conteneurTmp.append(string)
+                conteneur = conteneurTmp
 
             else:
-                conteneur = sorted(contenue, key=lambda str: len(str), reverse=self.reversed)
+                conteneur = sorted(contenue, key=len, reverse=self.reverse)
 
         elif sort == 'string':
             if self.settings.get('case_sensitive'):
-                conteneur = sorted(contenue, reverse=self.reversed)
+                conteneur = sorted(contenue, reverse=self.reverse)
             else:
-                conteneur = sorted(contenue, key=lambda str: str.lower(), reverse=self.reversed)
+                conteneur = sorted(contenue, key=str.lower, reverse=self.reverse)
 
         elif sort == 'naturalOrder':
             conteneur = sort_naturel(contenue)
 
         writeToView(self, region, conteneur)
 
-    def run(self, edit, sort = 'length', reversed=False):
-        lines = []
+    def run(self, edit, sort='length', reverse=False):
         self.edit = edit
         view = self.view
-        self.reversed = reversed
+        self.reverse = reverse
         SrtbyliCommand.edit = edit
         self.settings = sublime.load_settings("SortBy.sublime-settings")
 
