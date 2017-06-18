@@ -1,7 +1,6 @@
 from __future__ import print_function
 from collections import defaultdict
 import re
-import unicode
 import sublime
 import sublime_plugin
 
@@ -10,8 +9,8 @@ bases = {'binary' : 2, 'octal' : 8, 'decimal' : 10, 'hexadecimal' : 16}
 #Thanks to Ned Batchelder for this function
 #http://nedbatchelder.com/blog/200712/human_sorting.html
 def sort_naturel(liste):
-    convertion = lambda e: int(e) if e.isdigit() else e.lower()
-    key1 = lambda key: [convertion(g) for g in re.split('([0-9]+)', key)]
+    conversion = lambda e: int(e) if e.isdigit() else e.lower()
+    key1 = lambda key: [conversion(g) for g in re.split('([0-9]+)', key)]
     print(key1)
     return sorted(liste, key=key1)
 
@@ -48,7 +47,8 @@ class SortingObj(object):
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
 
-    def __init__(self):
+    def __init__(self, cmd):
+        super().__init__(cmd)
         self.reverse = False
         self.estSelect = None
         self.settings = None

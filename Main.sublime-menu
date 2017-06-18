@@ -18,27 +18,27 @@
                             {
                                 "caption": "SortBy: Alphabetically",
                                 "command": "srtbyli",
-                                "args": {"sort": "string","reversed": false}
+                                "args": {"sort": "string","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Alphabetically (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "string","reversed": true}
+                                "args": {"sort": "string","reverse": true}
                             },
                             {
                                 "caption": "SortBy: Length of lines",
                                 "command": "srtbyli",
-                                "args": {"sort": "length","reversed": false}
+                                "args": {"sort": "length","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Length of line (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "length","reversed": true}
+                                "args": {"sort": "length","reverse": true}
                             },
                             {
                                 "caption": "SortBy: Natural order",
                                 "command": "srtbyli",
-                                "args": {"sort": "naturalOrder","reversed": false}
+                                "args": {"sort": "naturalOrder","reverse": false}
                             }
                         ]
                     },
@@ -50,42 +50,42 @@
                             {
                                 "caption": "SortBy: Binary",
                                 "command": "srtbyli",
-                                "args": {"sort": "binary","reversed": false}
+                                "args": {"sort": "binary","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Binary (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "binary","reversed": true}
+                                "args": {"sort": "binary","reverse": true}
                             },
                             {
                                 "caption": "SortBy: Hexadecimal",
                                 "command": "srtbyli",
-                                "args": {"sort": "hexadecimal","reversed": false}
+                                "args": {"sort": "hexadecimal","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Hexadecimal (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "hexadecimal","reversed": true}
+                                "args": {"sort": "hexadecimal","reverse": true}
                             },
                             {
                                 "caption": "SortBy: Integer",
                                 "command": "srtbyli",
-                                "args": {"sort": "decimal","reversed": false}
+                                "args": {"sort": "decimal","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Integer (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "decimal","reversed": true}
+                                "args": {"sort": "decimal","reverse": true}
                             },
                             {
                                 "caption": "SortBy: Octal",
                                 "command": "srtbyli",
-                                "args": {"sort": "octal","reversed": false}
+                                "args": {"sort": "octal","reverse": false}
                             },
                             {
                                 "caption": "SortBy: Octal (Descending)",
                                 "command": "srtbyli",
-                                "args": {"sort": "octal","reversed": true}
+                                "args": {"sort": "octal","reverse": true}
                             }
                         ]
                     }
