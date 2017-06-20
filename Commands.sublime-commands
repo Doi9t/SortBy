@@ -2,66 +2,36 @@
     {
         "caption": "SortBy: Natural order",
         "command": "srtbyli",
-        "args": {"sort": "naturalOrder","reverse": false}
+        "args": {"sort": "naturalOrder"}
     },
     {
         "caption": "SortBy: Length of lines",
         "command": "srtbyli",
-        "args": {"sort": "length","reverse": false}
-    },
-    {
-        "caption": "SortBy: Length of lines (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "length","reverse": true}
+        "args": {"sort": "length"}
     },
     {
         "caption": "SortBy: Alphabetically",
         "command": "srtbyli",
-        "args": {"sort": "string","reverse": false}
-    },
-    {
-        "caption": "SortBy: Alphabetically (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "string","reverse": true}
+        "args": {"sort": "string"}
     },
     {
         "caption": "SortBy: Integer",
         "command": "srtbyli",
-        "args": {"sort": "decimal","reverse": false}
-    },
-    {
-        "caption": "SortBy: Integer (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "decimal","reverse": true}
+        "args": {"sort": "decimal"}
     },
     {
         "caption": "SortBy: Hexadecimal",
         "command": "srtbyli",
-        "args": {"sort": "hexadecimal","reverse": false}
-    },
-    {
-        "caption": "SortBy: Hexadecimal (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "hexadecimal","reverse": true}
+        "args": {"sort": "hexadecimal"}
     },
     {
         "caption": "SortBy: Octal",
         "command": "srtbyli",
-        "args": {"sort": "octal","reverse": false}
-    },
-    {
-        "caption": "SortBy: Octal (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "octal","reverse": true}
+        "args": {"sort": "octal"}
     },
     {
         "caption": "SortBy: Binary",
         "command": "srtbyli",
-        "args": {"sort": "binary","reverse": false}
+        "args": {"sort": "binary"}
     },
-    {
-        "caption": "SortBy: Binary (Descending)",
-        "command": "srtbyli",
-        "args": {"sort": "binary","reverse": true}
-    }
 ]

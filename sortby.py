@@ -76,9 +76,8 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
     def __init__(self, cmd):
         super().__init__(cmd)
-        self.reverse = False
         self.estSelect = None
-        self.settings = None
+        self.settings = sublime.load_settings("SortBy.sublime-settings")
 
     def sortNumbers(self, region, contenue, sort): #Sort numbers with letters
         conteneur = []
@@ -100,7 +99,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
             else: #No number found
                 obj.append(SortingObj(line, 0, sort))
 
-        obj.sort(key=lambda x: x.getNumber(), reverse=self.reverse)
+        obj.sort(key=lambda x: x.getNumber())
 
         for line in obj:
             conteneur.append(line.getLine())
@@ -121,10 +120,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
                 #Sort the groups alphabetically
                 for k, v in conteneur.items():
-                    conteneur[k] = sorted(v, reverse=self.settings.get('length_alphabetically_reversed'))
+                    conteneur[k] = sorted(v, reverse=self.settings.get("descending"))
 
                 #Sort the groups by length
-                conteneur = sorted(conteneur.items(), key=lambda t: t[0], reverse=self.reverse)
+                conteneur = sorted(conteneur.items(), key=lambda t: t[0], reverse=self.settings.get("descending"))
 
                 conteneurTmp = []
                 for k, v in conteneur:
@@ -133,7 +132,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                 conteneur = conteneurTmp
 
             else:
-                conteneur = sorted(contenue, key=len, reverse=self.reverse)
+                conteneur = sorted(contenue, key=len, reverse=self.settings.get("descending"))
         else:
             keyFuncs = []
 
@@ -149,15 +148,14 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
             keyFunc = compose(keyFuncs)
             print("final func:", keyFunc)
-            conteneur = sorted(contenue, key=keyFunc, reverse=self.reverse)
+            conteneur = sorted(contenue, key=keyFunc, reverse=self.settings.get("descending"))
 
         writeToView(self, region, conteneur)
 
-    def run(self, edit, sort='length', reverse=False):
+    def run(self, edit, sort='length'):
         print("---")
         self.edit = edit
         view = self.view
-        self.reverse = reverse
         SrtbyliCommand.edit = edit
         self.settings = sublime.load_settings("SortBy.sublime-settings")
 
@@ -177,3 +175,15 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                         self.sortStrings(region, [x for x in view.substr(region).splitlines() if x != ''], sort)
                     elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
                         self.sortNumbers(region, [x for x in view.substr(region).splitlines() if x != ''], sort)
+
+
+class OptionsDescendingCommand(sublime_plugin.TextCommand):
+
+    def is_checked(self):
+        settings = sublime.load_settings("SortBy.sublime-settings")
+        return settings.get("descending")
+
+    def run(self, edit):
+        settings = sublime.load_settings("SortBy.sublime-settings")
+        settings.set("descending", not settings.get("descending", False))
+        sublime.save_settings("SortBy.sublime-settings")

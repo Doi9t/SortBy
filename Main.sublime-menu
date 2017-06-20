@@ -1,93 +1,63 @@
 [
     {
-        "caption": "Tools",
         "id": "tools",
         "children":
         [
             {
                 "caption": "SortBy",
-                "id": "menu_doi9t_sb",
                 "mnemonic": "o",
+                "id": "sort_by",
                 "children":
                 [
                     {
-                        "caption": "Strings",
-                        "id": "menu_doi9t_sb_str",
-                        "children":
-                        [
-                            {
-                                "caption": "SortBy: Alphabetically",
-                                "command": "srtbyli",
-                                "args": {"sort": "string","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Alphabetically (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "string","reverse": true}
-                            },
-                            {
-                                "caption": "SortBy: Length of lines",
-                                "command": "srtbyli",
-                                "args": {"sort": "length","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Length of line (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "length","reverse": true}
-                            },
-                            {
-                                "caption": "SortBy: Natural order",
-                                "command": "srtbyli",
-                                "args": {"sort": "naturalOrder","reverse": false}
-                            }
-                        ]
+                        "caption": "Alpha",
+                        "mnemonic": "A",
+                        "command": "srtbyli",
+                        "args": {"sort": "string"}
                     },
                     {
-                        "caption": "Numbers",
-                        "id": "menu_doi9t_sb_num",
-                        "children":
-                        [
-                            {
-                                "caption": "SortBy: Binary",
-                                "command": "srtbyli",
-                                "args": {"sort": "binary","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Binary (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "binary","reverse": true}
-                            },
-                            {
-                                "caption": "SortBy: Hexadecimal",
-                                "command": "srtbyli",
-                                "args": {"sort": "hexadecimal","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Hexadecimal (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "hexadecimal","reverse": true}
-                            },
-                            {
-                                "caption": "SortBy: Integer",
-                                "command": "srtbyli",
-                                "args": {"sort": "decimal","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Integer (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "decimal","reverse": true}
-                            },
-                            {
-                                "caption": "SortBy: Octal",
-                                "command": "srtbyli",
-                                "args": {"sort": "octal","reverse": false}
-                            },
-                            {
-                                "caption": "SortBy: Octal (Descending)",
-                                "command": "srtbyli",
-                                "args": {"sort": "octal","reverse": true}
-                            }
-                        ]
+                        "caption": "Alpha – Natural",
+                        "mnemonic": "N",
+                        "command": "srtbyli",
+                        "args": {"sort": "naturalOrder"}
+                    },
+                    {
+                        "caption": "Number – Binary",
+                        "mnemonic": "B",
+                        "command": "srtbyli",
+                        "args": {"sort": "binary"}
+                    },
+                    {
+                        "caption": "Number – Hexadecimal",
+                        "mnemonic": "H",
+                        "command": "srtbyli",
+                        "args": {"sort": "hexadecimal"}
+                    },
+                    {
+                        "caption": "Number – Integer",
+                        "mnemonic": "I",
+                        "command": "srtbyli",
+                        "args": {"sort": "decimal"}
+                    },
+                    {
+                        "caption": "Number – Octal",
+                        "mnemonic": "O",
+                        "command": "srtbyli",
+                        "args": {"sort": "octal"}
+                    },
+                    {
+                        "caption": "Length of lines",
+                        "mnemonic": "L",
+                        "command": "srtbyli",
+                        "args": {"sort": "length"}
+                    },
+                    {
+                        "caption": "-",
+                    },
+                    {
+                        "caption": "Descending Order",
+                        "command": "reverse_sort",
+                        "checkbox": true
                     }
                 ]
             }
