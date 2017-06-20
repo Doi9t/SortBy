@@ -2,8 +2,8 @@
 	"alphabetical_case_sensitive": false,
 	"alphabetical_ignore_patterns":
 	[
-		"(^(the|a)\\s)"
+		"((^The)\\s)"
 	],
 	"descending": false,
-	"length_alphabetically_enabled": false
+	"length_alphabetical_enabled": false
 }

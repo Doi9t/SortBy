@@ -35,9 +35,11 @@ def naturalize(line):
     conversion = lambda e: int(e) if e.isdigit() else e
     return [conversion(g) for g in re.split('([0-9]+)', line)]
 
-def ignorePatterns(toIgnore):
+def ignorePatterns(toIgnore, caseSensitive):
     '''remove a string or regular expression from the line'''
-    return lambda line: functools.reduce(lambda line, pattern: re.sub(pattern, "", line), toIgnore, line)
+    def regexFunc(line, pattern):
+        return re.sub(pattern, "", line)
+    return lambda line: functools.reduce(regexFunc, toIgnore, line)
 
 ################################################################################
 
@@ -114,13 +116,15 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         '''sort alphabetically or naturally'''
 
         keyFuncs = []
+        caseSensitive = self.settings.get('alphabetical_case_sensitive', False)
+        toIgnore = self.settings.get('alphabetical_ignore_patterns', [])
 
-        toIgnore = self.settings.get('alphabetical_ignore_patterns')
-        if toIgnore:
-            keyFuncs.append(ignorePatterns(toIgnore))
-
-        if not self.settings.get('alphabetical_case_sensitive'):
+        if not caseSensitive:
             keyFuncs.append(str.lower)
+            toIgnore = [pattern.lower() for pattern in toIgnore]
+
+        if toIgnore:
+            keyFuncs.append(ignorePatterns(toIgnore, caseSensitive))
 
         if sort == 'naturalOrder':
             keyFuncs.append(naturalize)
@@ -213,4 +217,4 @@ class OptionsCaseSensitiveCommand(OptionBase):
 class OptionsLengthAlphaCommand(OptionBase):
     def __init__(self, cmd):
         super().__init__(cmd)
-        self.option = "length_alphabetically_enabled"
+        self.option = "length_alphabetical_enabled"
