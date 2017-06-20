@@ -1,18 +1,45 @@
 from __future__ import print_function
 from collections import defaultdict
+import functools
 import re
 import sublime
 import sublime_plugin
 
+def logInputAndOutput(func):
+    '''decorator to help with debugging'''
+    def function_wrapper(*args, **kwargs):
+        print("Before calling " + func.__name__ + ":")
+        for arg in args:
+            print("\t", type(arg), "|", arg)
+        for arg in kwargs:
+            print("\t", type(arg), "|", arg)
+        output = func(*args, **kwargs)
+        print("After calling " + func.__name__ + ":", type(output), "|", output)
+        return output
+    return function_wrapper
+
 bases = {'binary' : 2, 'octal' : 8, 'decimal' : 10, 'hexadecimal' : 16}
+fmap = lambda fnlist, argument: reduce(lambda x, fn: fn(x), [argument] + fnlist)
+
+@logInputAndOutput
+def compose(functions):
+    '''apply functions in order from left to right'''
+    return lambda x: functools.reduce(lambda a, f: f(a), functions, x)
 
 #Thanks to Ned Batchelder for this function
 #http://nedbatchelder.com/blog/200712/human_sorting.html
+@logInputAndOutput
+def naturalize(line):
+    conversion = lambda e: int(e) if e.isdigit() else e
+    return [conversion(g) for g in re.split('([0-9]+)', line)]
+
+@logInputAndOutput
 def sort_naturel(liste):
-    conversion = lambda e: int(e) if e.isdigit() else e.lower()
-    key1 = lambda key: [conversion(g) for g in re.split('([0-9]+)', key)]
-    print(key1)
-    return sorted(liste, key=key1)
+    return sorted(liste, key=naturalize)
+
+@logInputAndOutput
+def ignorePatterns(toIgnore):
+    return lambda line: [re.sub(pattern, "", line) for pattern in toIgnore]
 
 def putEndLines(arr):
     if int(sublime.version()) < 3000:
@@ -80,7 +107,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
         writeToView(self, region, conteneur)
 
+    @logInputAndOutput
     def sortStrings(self, region, contenue, sort): #Sort strings and natural order
+        print("sortStrings")
+
         if sort == 'length':
             if self.settings.get('length_alphabetically_enabled'):
                 conteneur = defaultdict(list)
@@ -104,19 +134,27 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
             else:
                 conteneur = sorted(contenue, key=len, reverse=self.reverse)
+        else:
+            keyFuncs = []
 
-        elif sort == 'string':
-            if self.settings.get('case_sensitive'):
-                conteneur = sorted(contenue, reverse=self.reverse)
-            else:
-                conteneur = sorted(contenue, key=str.lower, reverse=self.reverse)
+            # toIgnore = self.settings.get('ignore_when_sorting')
+            # if toIgnore:
+            #     keyFuncs.append(ignorePatterns)
 
-        elif sort == 'naturalOrder':
-            conteneur = sort_naturel(contenue)
+            if not self.settings.get('case_sensitive'):
+                keyFuncs.append(str.lower)
+
+            if sort == 'naturalOrder':
+                keyFuncs.append(naturalize)
+
+            keyFunc = compose(keyFuncs)
+            print("final func:", keyFunc)
+            conteneur = sorted(contenue, key=keyFunc, reverse=self.reverse)
 
         writeToView(self, region, conteneur)
 
     def run(self, edit, sort='length', reverse=False):
+        print("---")
         self.edit = edit
         view = self.view
         self.reverse = reverse

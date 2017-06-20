@@ -1,1 +1,6 @@
 *.pyc
+tidy_xml.py
+Package Control.last-run
+Package Control.sublime-settings
+Preferences.sublime-settings
+SublimeLinter.sublime-settings
