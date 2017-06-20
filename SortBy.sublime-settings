@@ -4,6 +4,6 @@
 	[
 		"(^(the|a)\\s)"
 	],
-	"descending": true,
-	"length_alphabetically_enabled": true
+	"descending": false,
+	"length_alphabetically_enabled": false
 }

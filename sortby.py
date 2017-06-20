@@ -8,6 +8,7 @@ import sublime_plugin
 bases = {'binary' : 2, 'octal' : 8, 'decimal' : 10, 'hexadecimal' : 16}
 
 ################################################################################
+# helpers
 
 def logInputAndOutput(func):
     '''decorator to help with debugging'''
@@ -22,20 +23,18 @@ def logInputAndOutput(func):
         return output
     return function_wrapper
 
-################################################################################
-# functions to modify keys
-@logInputAndOutput
 def compose(functions):
     '''apply functions in order from left to right'''
     return lambda x: functools.reduce(lambda a, f: f(a), functions, x)
 
-@logInputAndOutput
+################################################################################
+# functions to modify keys
+
 def naturalize(line):
     '''http://nedbatchelder.com/blog/200712/human_sorting.html'''
     conversion = lambda e: int(e) if e.isdigit() else e
     return [conversion(g) for g in re.split('([0-9]+)', line)]
 
-@logInputAndOutput
 def ignorePatterns(toIgnore):
     '''remove a string or regular expression from the line'''
     return lambda line: functools.reduce(lambda line, pattern: re.sub(pattern, "", line), toIgnore, line)
@@ -111,7 +110,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
         writeToView(self, region, conteneur)
 
-    @logInputAndOutput
     def sortStrings(self, region, contenue, sort):
         '''sort alphabetically or naturally'''
 
@@ -128,12 +126,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
             keyFuncs.append(naturalize)
 
         keyFunc = compose(keyFuncs)
-        print("final func:", keyFunc)
         conteneur = sorted(contenue, key=keyFunc, reverse=self.settings.get("descending"))
 
         writeToView(self, region, conteneur)
 
-    @logInputAndOutput
     def sortLength(self, region, contenue, sort):
         '''sort by string length'''
         if self.settings.get('length_alphabetically_enabled'):
@@ -169,7 +165,6 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
             self.sortLength(region, lines, sort)
 
     def run(self, edit, sort='string'):
-        print("---")
         view = self.view
         self.edit = edit
         self.settings = sublime.load_settings("SortBy.sublime-settings")
