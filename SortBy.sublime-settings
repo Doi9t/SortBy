@@ -1,9 +1,9 @@
 {
 	"alphabetical_case_sensitive": false,
-	"descending": false,
-	"ignore_when_sorting":
+	"alphabetical_ignore_patterns":
 	[
 		"(^(the|a)\\s)"
 	],
-	"length_alphabetically_enabled": false
+	"descending": true,
+	"length_alphabetically_enabled": true
 }

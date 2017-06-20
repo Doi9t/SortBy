@@ -47,14 +47,41 @@
                 "command": "srtbyli",
                 "args": {"sort": "length"},
             },
-            {
-                "caption": "-",
-            },
+
+            {"caption": "-"},
+
             {
                 "caption": "Descending Order",
                 "command": "options_descending",
                 "checkbox": true,
-            }
+            },
+            {
+                "caption": "Alpha – Case Sensitive",
+                "command": "options_case_sensitive",
+                "checkbox": true,
+            },
+            {
+                "caption": "Length – Alphabetize",
+                "command": "options_length_alpha",
+                "checkbox": true,
+            },
+
+            {"caption": "-"},
+
+            {
+                "caption": "Settings – Default",
+                "command": "open_file", "args":
+                {
+                    "file": "${packages}/SortBy/SortBy.sublime-settings"
+                }
+            },
+            {
+                "caption": "Settings – User",
+                "command": "open_file", "args":
+                {
+                    "file": "${packages}/User/SortBy.sublime-settings"
+                }
+            },
         ]
     }
 ]
