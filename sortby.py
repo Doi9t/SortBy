@@ -24,106 +24,183 @@ bases = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
 # Thanks to Ned Batchelder for this function
 # http://nedbatchelder.com/blog/200712/human_sorting.html
 def natural_sort(list_to_sort):
+    """
+    Sort the specified list, with the natural sort
+    :param list_to_sort: the list to sort
+    :return: The sorted list
+    """
     convertion = lambda e: int(e) if e.isdigit() else e.lower()
     key1 = lambda key: [convertion(g) for g in re.split('([0-9]+)', key)]
     return sorted(list_to_sort, key=key1)
 
 
-def putEndLines(arr):
-    arr = [str(x.encode('utf-8'), encoding='utf-8') + '\n' for x in arr]
-    arr[-1] = arr[-1][:-1]
-    return arr
+def putEndLines(lines):
+    """
+    Method that adds a `\n` to each line
+    :param lines:
+    :return:
+    """
+    lines = [str(x.encode('utf-8'), encoding='utf-8') + '\n' for x in lines]
+    lines[-1] = lines[-1][:-1]
+    return lines
 
 
-class SortingObj(object):
-    def __init__(self, line, number, base):
+class ContainerHelper(object):
+    """
+    An object that contains the selected value & full line.
+    """
+
+    def __init__(self, line, value):
         self.line = str(line).strip()
-        self.number = number
-        self.base = base
+        self.value = value
 
     def getLine(self):
         return self.line
 
+    def getValue(self):
+        return self.value
+
+
+class NumberSortContainerHelper(ContainerHelper):
+    """
+    An object that contains the number & full line.
+    """
+
+    def __init__(self, line, number, base):
+        super().__init__(line, number)
+        self.base = base
+
     def getNumber(self):
-        if self.number == 0:
+        number = self.getValue()
+        if number == 0:
             return 0
         else:
-            return int(self.number, bases[self.base])
+            return int(number, bases[self.base])
 
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
-    def sortNumbers(self, region, lines, sort):  # Sort numbers with letters
-        container = []
+    def sortNumbers(self, region, lines, sort):
+        """
+        Sort the first number of each line, contained in the region
+        :param region: The region
+        :param lines: The lines
+        :param sort: The type of the sort
+        """
+        sorted_lines = []
         obj = []
 
         for line in lines:
-            number = ''
-            if sort == 'decimal':
-                number = re.findall(r'[+-]?\d+(?:\.\d+)?', line)
-            if sort == 'octal':
-                number = re.findall(r'[0-7]+', line)
-            if sort == 'hexadecimal':
-                number = re.findall(r'(?:0[xX])?[0-9a-fA-F]+', line)
-            if sort == 'binary':
-                number = re.findall(r'[01]+', line)
+            numberMatch = None
 
-            if len(number) > 0:
-                obj.append(SortingObj(line, number[0], sort))
-            else:  # No number found
-                obj.append(SortingObj(line, 0, sort))
+            if sort == 'decimal':
+                numberMatch = re.search(r'[+-]?\d+(?:\.\d+)?', line)
+            elif sort == 'octal':
+                numberMatch = re.search(r'[0-7]+', line)
+            elif sort == 'hexadecimal':
+                numberMatch = re.search(r'(?:0[xX])?[0-9a-fA-F]+', line)
+            elif sort == 'binary':
+                numberMatch = re.search(r'[01]+', line)
+
+            if numberMatch is None:
+                obj.append(NumberSortContainerHelper(line, 0, sort))
+            else:
+                obj.append(NumberSortContainerHelper(line, numberMatch.group(), sort))
 
         obj.sort(key=lambda x: x.getNumber(), reverse=self.reversed)
 
         for line in obj:
-            container.append(line.getLine())
+            sorted_lines.append(line.getLine())
 
-        self.writeToView(region, container)
+        self.writeToView(region, sorted_lines)
 
-    def sortStrings(self, region, content, sort):  # Sort strings and natural order
-        container = None
+    def sortStructures(self, region, lines, sort):
+        """
+        Sort the first structure of each line, contained in the region
+        :param region: The region
+        :param lines: The lines
+        :param sort: The type of the sort
+        """
+        sorted_lines = []
+        lines_to_sort = []
+
+        if sort == 'semver':
+            for line in lines:
+                # The regex come from : https://semver.org/
+                semVerMatch = re.search(r'(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)'
+                                        r'(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
+                                        r'(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))'
+                                        r'?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?', line)
+
+                if semVerMatch is None:
+                    lines_to_sort.append(ContainerHelper(line, "0.0.0"))
+                else:
+                    lines_to_sort.append(ContainerHelper(line, semVerMatch.group()))
+
+            # Thanks to @eli-bendersky https://stackoverflow.com/a/2574090
+            lines_to_sort.sort(key=lambda x: list(map(int, x.getValue().split('.'))), reverse=self.reversed)
+
+        for line in lines_to_sort:
+            sorted_lines.append(line.getLine())
+
+        self.writeToView(region, sorted_lines)
+
+    def sortStrings(self, region, lines, sort):
+        """
+        Sort the strings / lines, contained in the region
+        :param region: The region
+        :param lines: The lines
+        :param sort: The type of the sort
+        """
+        sorted_lines = None
 
         if sort == 'length':
             if self.settings.get('length_alphabetically_enabled'):
-                container = defaultdict(list)
+                sorted_lines = defaultdict(list)
 
                 # Put all values in a defaultdict (Grouped by length)
-                for value in sorted(content, key=lambda current_str: len(current_str)):
-                    container[len(value)].append(value)
+                for value in sorted(lines, key=lambda current_str: len(current_str)):
+                    sorted_lines[len(value)].append(value)
 
                 # Sort the groups alphabetically
-                for index, values in container.items():
-                    container[index] = sorted(values, reverse=self.settings.get('length_alphabetically_reversed'))
+                for index, values in sorted_lines.items():
+                    sorted_lines[index] = sorted(values, reverse=self.settings.get('length_alphabetically_reversed'))
 
                 # Sort the groups by length
-                container = sorted(container.items(), key=lambda t: t[0], reverse=self.reversed)
+                sorted_lines = sorted(sorted_lines.items(), key=lambda t: t[0], reverse=self.reversed)
 
                 tempContainer = []
-                for index, values in container:
+                for index, values in sorted_lines:
                     for value in values:
                         tempContainer.append(value)
-                container = tempContainer
+                sorted_lines = tempContainer
             else:
-                container = sorted(content, key=lambda current_str: len(current_str), reverse=self.reversed)
+                sorted_lines = sorted(lines, key=lambda current_str: len(current_str), reverse=self.reversed)
 
         elif sort == 'string':
             if self.settings.get('case_sensitive'):
-                container = sorted(content, reverse=self.reversed)
+                sorted_lines = sorted(lines, reverse=self.reversed)
             else:
-                container = sorted(content, key=lambda current_string: current_string.lower(), reverse=self.reversed)
+                sorted_lines = sorted(lines, key=lambda current_string: current_string.lower(), reverse=self.reversed)
 
         elif sort == 'naturalOrder':
-            container = natural_sort(content)
+            sorted_lines = natural_sort(lines)
 
-        if container is not None:
-            self.writeToView(region, container)
+        if sorted_lines is not None:
+            self.writeToView(region, sorted_lines)
 
-    def writeToView(self, region, container):
-        if len(container) != 0:
+    def writeToView(self, region, sorted_lines):
+        """
+        Method that write the specified dictionary into the view
+        :param region: The selected region
+        :param sorted_lines: The lines to be written to the region
+        """
+
+        if len(sorted_lines) != 0:
             if self.estSelect:
-                self.view.replace(self.edit, region, ''.join(putEndLines(container)))
+                self.view.replace(self.edit, region, ''.join(putEndLines(sorted_lines)))
             else:
                 self.view.erase(self.edit, sublime.Region(0, self.view.size()))
-                self.view.insert(self.edit, 0, ''.join(putEndLines(container)))
+                self.view.insert(self.edit, 0, ''.join(putEndLines(sorted_lines)))
         else:
             print("SortBy error: No string found !")
 
@@ -136,21 +213,27 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
         if view.sel()[0].empty() and len(view.sel()) == 1:  # No selection
             self.estSelect = False
+
+            region = view.sel()[-1].end()
+            raw_lines = [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != '']
+
             if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-                self.sortStrings(view.sel()[-1].end(),
-                                 [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != ''],
-                                 sort)
+                self.sortStrings(region, raw_lines, sort)
             elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-                self.sortNumbers(view.sel()[-1].end(),
-                                 [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != ''],
-                                 sort)
+                self.sortNumbers(region, raw_lines, sort)
+            elif sort == 'semver':
+                self.sortStructures(region, raw_lines, sort)
         else:
             self.estSelect = True
             for region in view.sel():
                 if region.empty():
                     continue
                 else:
+                    raw_lines = [x for x in view.substr(region).splitlines() if x != '']
+
                     if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-                        self.sortStrings(region, [x for x in view.substr(region).splitlines() if x != ''], sort)
+                        self.sortStrings(region, raw_lines, sort)
                     elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-                        self.sortNumbers(region, [x for x in view.substr(region).splitlines() if x != ''], sort)
+                        self.sortNumbers(region, raw_lines, sort)
+                    elif sort == 'semver':
+                        self.sortStructures(region, raw_lines, sort)

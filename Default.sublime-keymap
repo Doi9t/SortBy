@@ -1,80 +1,167 @@
 [
-    {
-        "caption": "SortBy: Natural order",
-        "keys": ["ctrl+shift+alt+q"],
-        "command": "srtbyli",
-        "args": {"sort": "naturalOrder","reversed": false}
-    },
-    {
-        "caption": "SortBy: Length of lines",
-        "keys": ["ctrl+shift+alt+w"],
-        "command": "srtbyli",
-        "args": {"sort": "length","reversed": false}
-    },
-    {
-        "caption": "SortBy: Length of lines (Descending)",
-        "keys": ["ctrl+shift+alt+e"],
-        "command": "srtbyli",
-        "args": {"sort": "length","reversed": true}
-    },
-    {
-        "caption": "SortBy: Alphabetically",
-        "keys": ["ctrl+shift+alt+r"],
-        "command": "srtbyli",
-        "args": {"sort": "string","reversed": false}
-    },
-    {
-        "caption": "SortBy: Alphabetically (Descending)",
-        "keys": ["ctrl+shift+alt+t"],
-        "command": "srtbyli",
-        "args": {"sort": "string","reversed": true}
-    },
-    {
-        "caption": "SortBy: Integer",
-        "keys": ["ctrl+shift+alt+y"],
-        "command": "srtbyli",
-        "args": {"sort": "decimal","reversed": false}
-    },
-    {
-        "caption": "SortBy: Integer (Descending)",
-        "keys": ["ctrl+shift+alt+u"],
-        "command": "srtbyli",
-        "args": {"sort": "decimal","reversed": true}
-    },
-    {
-        "caption": "SortBy: Hexadecimal",
-        "keys": ["ctrl+shift+alt+i"],
-        "command": "srtbyli",
-        "args": {"sort": "hexadecimal","reversed": false}
-    },
-    {
-        "caption": "SortBy: Hexadecimal (Descending)",
-        "keys": ["ctrl+shift+alt+o"],
-        "command": "srtbyli",
-        "args": {"sort": "hexadecimal","reversed": true}
-    },
-    {
-        "caption": "SortBy: Octal",
-        "keys": ["ctrl+shift+alt+p"],
-        "command": "srtbyli",
-        "args": {"sort": "octal","reversed": false}
-    },
-    {
-        "caption": "SortBy: Octal (Descending)",
-        "keys": ["ctrl+shift+alt+a"],
-        "command": "srtbyli",
-        "args": {"sort": "octal","reversed": true}
-    },
-    {
-        "caption": "SortBy: Binary",
-        "keys": ["ctrl+shift+alt+s"],
-        "command": "srtbyli",
-        "args": {"sort": "binary","reversed": false}
-    },
-    {
-        "caption": "SortBy: Binary (Descending)",
-        "keys": ["ctrl+shift+alt+d"],
-        "command": "srtbyli",
-        "args": {"sort": "binary","reversed": true}
+  {
+    "caption": "SortBy: Natural order",
+    "keys": [
+      "ctrl+shift+alt+q"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "naturalOrder",
+      "reversed": false
     }
+  },
+  {
+    "caption": "SortBy: Length of lines",
+    "keys": [
+      "ctrl+shift+alt+w"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "length",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Length of lines (Descending)",
+    "keys": [
+      "ctrl+shift+alt+e"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "length",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Alphabetically",
+    "keys": [
+      "ctrl+shift+alt+r"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "string",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Alphabetically (Descending)",
+    "keys": [
+      "ctrl+shift+alt+t"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "string",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Integer",
+    "keys": [
+      "ctrl+shift+alt+y"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "decimal",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Integer (Descending)",
+    "keys": [
+      "ctrl+shift+alt+u"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "decimal",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Hexadecimal",
+    "keys": [
+      "ctrl+shift+alt+i"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "hexadecimal",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Hexadecimal (Descending)",
+    "keys": [
+      "ctrl+shift+alt+o"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "hexadecimal",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Octal",
+    "keys": [
+      "ctrl+shift+alt+p"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "octal",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Octal (Descending)",
+    "keys": [
+      "ctrl+shift+alt+a"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "octal",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Binary",
+    "keys": [
+      "ctrl+shift+alt+s"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "binary",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Binary (Descending)",
+    "keys": [
+      "ctrl+shift+alt+d"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "binary",
+      "reversed": true
+    }
+  },
+  {
+    "caption": "SortBy: Semantic Versioning",
+    "keys": [
+      "ctrl+shift+alt+v"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "semver",
+      "reversed": false
+    }
+  },
+  {
+    "caption": "SortBy: Semantic Versioning (Descending)",
+    "keys": [
+      "ctrl+shift+alt+v"
+    ],
+    "command": "srtbyli",
+    "args": {
+      "sort": "semver",
+      "reversed": true
+    }
+  }
 ]

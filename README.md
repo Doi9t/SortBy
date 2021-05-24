@@ -4,10 +4,11 @@
 
 **Sorting methods available**
 - Natural order
+- Semantic Versioning (version only, not stages)
 - Sort by the length of lines (Ascending / Descending)
 	- Can be sorted alphabetically (Ascending / Descending) (Editable in SortBy.sublime-settings)
 - Sort lines of text alphabetically (Ascending / Descending)
-- Sort numbers numerically with and without surrounding caracters (Ascending / Descending)
+- Sort numbers numerically with and without surrounding characters (Ascending / Descending)
     1. Binary
     2. Hexadecimal
     3. Integer
