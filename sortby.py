@@ -134,7 +134,11 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                 if semVerMatch is None:
                     lines_to_sort.append(ContainerHelper(line, "0.0.0"))
                 else:
-                    lines_to_sort.append(ContainerHelper(line, semVerMatch.group()))
+                    major = semVerMatch.group('major')
+                    minor = semVerMatch.group('minor')
+                    patch = semVerMatch.group('patch')
+                    version = "{major}.{minor}.{patch}".format(major=major, minor=minor, patch=patch)
+                    lines_to_sort.append(ContainerHelper(line, version))
 
             # Thanks to @eli-bendersky https://stackoverflow.com/a/2574090
             lines_to_sort.sort(key=lambda x: list(map(int, x.getValue().split('.'))), reverse=self.reversed)
