@@ -69,13 +69,18 @@ class NumberSortContainerHelper(ContainerHelper):
     def __init__(self, line, number, base):
         super().__init__(line, number)
         self.base = base
+        self.number = number
 
     def getNumber(self):
         number = self.getValue()
         if number == 0:
             return 0
         else:
-            return int(number, bases[self.base])
+            current_base = bases[self.base]
+            if current_base == 10:
+                return float(self.number)
+            else:
+                return int(self.number, current_base)
 
 
 class SrtbyliCommand(sublime_plugin.TextCommand):

@@ -55,7 +55,7 @@
     }
   },
   {
-    "caption": "SortBy: Integer",
+    "caption": "SortBy: Decimal",
     "keys": [
       "ctrl+shift+alt+y"
     ],
@@ -66,7 +66,7 @@
     }
   },
   {
-    "caption": "SortBy: Integer (Descending)",
+    "caption": "SortBy: Decimal (Descending)",
     "keys": [
       "ctrl+shift+alt+u"
     ],

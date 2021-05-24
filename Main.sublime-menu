@@ -94,7 +94,7 @@
                     }
                   },
                   {
-                    "caption": "SortBy: Integer",
+                    "caption": "SortBy: Decimal",
                     "command": "srtbyli",
                     "args": {
                       "sort": "decimal",
@@ -102,7 +102,7 @@
                     }
                   },
                   {
-                    "caption": "SortBy: Integer (Descending)",
+                    "caption": "SortBy: Decimal (Descending)",
                     "command": "srtbyli",
                     "args": {
                       "sort": "decimal",
