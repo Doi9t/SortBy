@@ -55,7 +55,11 @@ class SortingObj(object):
         if self.number == 0:
             return 0
         else:
-            return int(self.number, bases[self.base])
+            current_base = bases[self.base]
+            if current_base == 10:
+                return float(self.number)
+            else:
+                return int(self.number, current_base)
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
 

@@ -10,7 +10,7 @@
 - Sort numbers numerically with and without surrounding caracters (Ascending / Descending)
     1. Binary
     2. Hexadecimal
-    3. Integer
+    3. Decimal
     4. Octal
 
 **Available features**

@@ -30,13 +30,13 @@
         "args": {"sort": "string","reversed": true}
     },
     {
-        "caption": "SortBy: Integer",
+        "caption": "SortBy: Decimal",
         "keys": ["ctrl+shift+alt+y"],
         "command": "srtbyli",
         "args": {"sort": "decimal","reversed": false}
     },
     {
-        "caption": "SortBy: Integer (Descending)",
+        "caption": "SortBy: Decimal (Descending)",
         "keys": ["ctrl+shift+alt+u"],
         "command": "srtbyli",
         "args": {"sort": "decimal","reversed": true}
