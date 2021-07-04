@@ -154,5 +154,53 @@
         ]
       }
     ]
+  },
+  {
+    "id": "preferences",
+    "children": [
+      {
+        "caption": "Package Settings",
+        "id": "package-settings",
+        "children": [
+          {
+            "caption": "SortBy",
+            "id": "menu_doi9t_sb_settings",
+            "children": [
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/SortBy/Default.sublime-keymap"
+                },
+                "caption": "Plugin Key Bindings"
+              },
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/User/Default (Windows).sublime-keymap",
+                  "platform": "Windows"
+                },
+                "caption": "Key Bindings – User"
+              },
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/User/Default (OSX).sublime-keymap",
+                  "platform": "OSX"
+                },
+                "caption": "Key Bindings – User"
+              },
+              {
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/User/Default (Linux).sublime-keymap",
+                  "platform": "Linux"
+                },
+                "caption": "Key Bindings – User"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
