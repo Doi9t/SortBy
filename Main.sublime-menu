@@ -169,6 +169,13 @@
               {
                 "command": "open_file",
                 "args": {
+                  "file": "${packages}/SortBy/SortBy.sublime-settings"
+                },
+                "caption": "Plugin settings"
+              },
+              {
+                "command": "open_file",
+                "args": {
                   "file": "${packages}/SortBy/Default.sublime-keymap"
                 },
                 "caption": "Plugin Key Bindings"

@@ -204,7 +204,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         """
 
         if len(sorted_lines) != 0:
-            if self.estSelect:
+            if self.haveSelectedRegionsOfText:
                 self.view.replace(self.edit, region, ''.join(putEndLines(sorted_lines)))
             else:
                 self.view.erase(self.edit, sublime.Region(0, self.view.size()))
@@ -219,29 +219,40 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         SrtbyliCommand.edit = edit
         self.settings = sublime.load_settings("SortBy.sublime-settings")
 
-        if view.sel()[0].empty() and len(view.sel()) == 1:  # No selection
-            self.estSelect = False
+        selection = view.sel()
 
-            region = view.sel()[-1].end()
+        if selection is None or len(selection) == 0:  # Just is case
+            print("SortBy error: No selection found !")
+            return
+
+        if len(selection) == 1 and selection[0].empty():  # No selection
+            self.haveSelectedRegionsOfText = False
+            region = selection[0].end()
             raw_lines = [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != '']
-
-            if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-                self.sortStrings(region, raw_lines, sort)
-            elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-                self.sortNumbers(region, raw_lines, sort)
-            elif sort == 'semver':
-                self.sortStructures(region, raw_lines, sort)
+            self.apply_sort_from_type(raw_lines, region, sort)
         else:
-            self.estSelect = True
-            for region in view.sel():
+            self.haveSelectedRegionsOfText = True
+            for region in selection:
                 if region.empty():
                     continue
                 else:
-                    raw_lines = [x for x in view.substr(region).splitlines() if x != '']
+                    region_to_write = None
+                    if self.settings.get('handle_selected_part_of_line_has_full_selected_line'):
+                        regions = view.lines(region)
+                        first = regions[0]
+                        last_region = regions[-1]
+                        region_to_write = sublime.Region(first.begin(), last_region.end())
+                        selection.add(region_to_write)
+                    else:
+                        region_to_write = region
 
-                    if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-                        self.sortStrings(region, raw_lines, sort)
-                    elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-                        self.sortNumbers(region, raw_lines, sort)
-                    elif sort == 'semver':
-                        self.sortStructures(region, raw_lines, sort)
+                    raw_lines = [x for x in view.substr(region_to_write).splitlines() if x != '']
+                    self.apply_sort_from_type(raw_lines, region_to_write, sort)
+
+    def apply_sort_from_type(self, raw_lines, region, sort):
+        if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
+            self.sortStrings(region, raw_lines, sort)
+        elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
+            self.sortNumbers(region, raw_lines, sort)
+        elif sort == 'semver':
+            self.sortStructures(region, raw_lines, sort)
