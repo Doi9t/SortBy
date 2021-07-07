@@ -21,11 +21,12 @@ import sublime_plugin
 bases = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
 
 
-# Thanks to Ned Batchelder for this function
-# http://nedbatchelder.com/blog/200712/human_sorting.html
 def natural_sort(list_to_sort):
     """
-    Sort the specified list, with the natural sort
+    Sort the specified list, with the natural sort.
+
+    A special thanks to Ned Batchelder for this function
+    https://nedbatchelder.com/blog/200712/human_sorting.html
     :param list_to_sort: the list to sort
     :return: The sorted list
     """
@@ -204,7 +205,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         """
 
         if len(sorted_lines) != 0:
-            if self.haveSelectedRegionsOfText:
+            if self.have_selected_regions_of_text:
                 self.view.replace(self.edit, region, ''.join(putEndLines(sorted_lines)))
             else:
                 self.view.erase(self.edit, sublime.Region(0, self.view.size()))
@@ -226,12 +227,12 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
             return
 
         if len(selection) == 1 and selection[0].empty():  # No selection
-            self.haveSelectedRegionsOfText = False
+            self.have_selected_regions_of_text = False
             region = selection[0].end()
             raw_lines = [x for x in view.substr(sublime.Region(0, self.view.size())).splitlines() if x != '']
             self.apply_sort_from_type(raw_lines, region, sort)
         else:
-            self.haveSelectedRegionsOfText = True
+            self.have_selected_regions_of_text = True
             for region in selection:
                 if region.empty():
                     continue
