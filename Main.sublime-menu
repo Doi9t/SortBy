@@ -167,9 +167,10 @@
             "id": "menu_doi9t_sb_settings",
             "children": [
               {
-                "command": "open_file",
+                "command": "edit_settings",
                 "args": {
-                  "file": "${packages}/SortBy/SortBy.sublime-settings"
+                  "base_file": "${packages}/SortBy/SortBy.sublime-settings",
+                  "default": "{\n$0\n}\n"
                 },
                 "caption": "Plugin settings"
               },

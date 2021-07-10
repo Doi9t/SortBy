@@ -37,7 +37,7 @@ and type SortBy in the box.
 
 ### Sorts
 
-#### handle_selected_part_of_line_has_full_selected_line
+#### handle_selected_part_of_line_as_full_selected_line
 Enable this (true) to ignore the start & end of the selection; any line that is touching the selection, will be sorted.
 
 ### Key Bindings

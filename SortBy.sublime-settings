@@ -2,5 +2,5 @@
   "alphabetical_case_sensitive": false,
   "length_alphabetically_enabled": false,
   "length_alphabetically_reversed": false,
-  "handle_selected_part_of_line_has_full_selected_line": false
+  "handle_selected_part_of_line_as_full_selected_line": false
 }

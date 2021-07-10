@@ -238,7 +238,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                     continue
                 else:
                     region_to_write = None
-                    if self.settings.get('handle_selected_part_of_line_has_full_selected_line'):
+                    if self.settings.get('handle_selected_part_of_line_as_full_selected_line'):
                         regions = view.lines(region)
                         first = regions[0]
                         last_region = regions[-1]
