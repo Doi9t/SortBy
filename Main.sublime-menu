@@ -4,8 +4,8 @@
     "id": "tools",
     "children": [
       {
-        "caption": "Doi9t's packages",
-        "id": "menu_doi9t",
+        "id": "packages",
+        "caption": "Packages",
         "children": [
           {
             "caption": "SortBy",
@@ -19,7 +19,7 @@
                     "caption": "SortBy: Alphabetically",
                     "command": "srtbyli",
                     "args": {
-                      "sort": "string",
+                      "sort": "alphabetically",
                       "reversed": false
                     }
                   },
@@ -27,7 +27,7 @@
                     "caption": "SortBy: Alphabetically (Descending)",
                     "command": "srtbyli",
                     "args": {
-                      "sort": "string",
+                      "sort": "alphabetically",
                       "reversed": true
                     }
                   },
@@ -51,7 +51,7 @@
                     "caption": "SortBy: Natural order",
                     "command": "srtbyli",
                     "args": {
-                      "sort": "naturalOrder",
+                      "sort": "natural_order",
                       "reversed": false
                     }
                   }
@@ -179,7 +179,7 @@
                 "args": {
                   "file": "${packages}/SortBy/Default.sublime-keymap"
                 },
-                "caption": "Plugin Key Bindings"
+                "caption": "Key Bindings – Default"
               },
               {
                 "command": "open_file",

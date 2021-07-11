@@ -3,7 +3,7 @@
     "caption": "SortBy: Natural order",
     "command": "srtbyli",
     "args": {
-      "sort": "naturalOrder",
+      "sort": "natural_order",
       "reversed": false
     }
   },
@@ -27,7 +27,7 @@
     "caption": "SortBy: Alphabetically",
     "command": "srtbyli",
     "args": {
-      "sort": "string",
+      "sort": "alphabetically",
       "reversed": false
     }
   },
@@ -35,7 +35,7 @@
     "caption": "SortBy: Alphabetically (Descending)",
     "command": "srtbyli",
     "args": {
-      "sort": "string",
+      "sort": "alphabetically",
       "reversed": true
     }
   },

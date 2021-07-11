@@ -10,35 +10,44 @@
 | Sort by the length of lines                | x    | x    | x    |
 | Sort lines of text alphabetically          | x    | x    | x    |
 | Sort numbers numerically                   | x    | x    | x    |
+
+You can check the [backward-incompatible-changes](./backward-incompatible-changes.md) file to see if you need to do something to keep your current settings / workflow.
+
 1. Able to sort the entire file (when there is no selection)
 2. Case sensitivity option for the `alphabetically sort` method (Editable in SortBy.sublime-settings)
 
-
 ## Installation
 
-### Manual installation
+### With [Package Control](https://packagecontrol.io/packages/SortBy)
+`CTRL` + `SHIFT` + `P` on Windows/Linux.
+`COMMAND` + `SHIFT` + `P` on OS X.
+and type SortBy in the box.
 
+### Manual installation
 1. Find your local Sublime Text `Packages` directory.
-Example : `C:\Users\USER_NAME\AppData\Roaming\Sublime Text [2, 3 or 4]\Packages`
 2. Copy the SortBy directory inside the Packages directory.
 3. Restart Sublime Text and enjoy !
 
 ## How to use
 1. Select the text you want to sort.
-2. Go in the menu "Tools", "Doi9t's packages" then you should see "SortBy".
+2. Go in the menu `Tools`, `Packages` then you should see `SortBy`.
 3. Choose your option. (Either Reverse or normal).
 
-Or using the control palette.
-`CTRL` + `SHIFT` + `P` on Windows/Linux.
-`COMMAND` + `SHIFT` + `P` on OS X.
-and type SortBy in the box.
-
 ## Settings
-
 ### Sorts
-
 #### handle_selected_part_of_line_as_full_selected_line
 Enable this (true) to ignore the start & end of the selection; any line that is touching the selection, will be sorted.
+
+#### alphabetically_case_sensitive
+Enable this (true) to sort with the case sensitivity (the lower and the upper cases will be sorted in two different groups).
+
+#### Subsorts
+
+##### Length of lines
+*This Subsort is disabled by default.*
+
+You can sort the line of the same length alphabetically.
+To enable this subsort, add the `subsort_length_of_line` property with the value `ALPHABETICALLY` OR `ALPHABETICALLY_DESCENDING` in the plugin settings.
 
 ### Key Bindings
 #### Create the file
@@ -62,7 +71,7 @@ When the file is created or opened, you need to override the key binding that yo
     ],
     "command": "srtbyli",
     "args": {
-      "sort": "naturalOrder",
+      "sort": "natural_order",
       "reversed": false
     }
   }
@@ -80,7 +89,7 @@ When the file is created or opened, you need to override the key binding that yo
     ],
     "command": "srtbyli",
     "args": {
-      "sort": "naturalOrder",
+      "sort": "natural_order",
       "reversed": false
     }
   }

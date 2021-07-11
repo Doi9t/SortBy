@@ -18,6 +18,8 @@ from collections import defaultdict
 import sublime
 import sublime_plugin
 
+from .sorttype import SortType
+
 bases = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
 
 
@@ -35,7 +37,7 @@ def natural_sort(list_to_sort):
     return sorted(list_to_sort, key=key1)
 
 
-def putEndLines(lines):
+def put_end_lines(lines):
     """
     Method that adds a `\n` to each line
     :param lines:
@@ -84,7 +86,7 @@ class NumberSortContainerHelper(ContainerHelper):
 
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
-    def sortNumbers(self, region, lines, sort):
+    def sort_numbers(self, region, lines, sort):
         """
         Sort the first number of each line, contained in the region
         :param region: The region
@@ -92,33 +94,36 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         :param sort: The type of the sort
         """
         sorted_lines = []
-        obj = []
+        containers = []
 
         for line in lines:
-            numberMatch = None
+            number_match = self.extract_line(line, sort)
 
-            if sort == 'decimal':
-                numberMatch = re.search(r'[+-]?\d+(?:\.\d+)?', line)
-            elif sort == 'octal':
-                numberMatch = re.search(r'[0-7]+', line)
-            elif sort == 'hexadecimal':
-                numberMatch = re.search(r'(?:0[xX])?[0-9a-fA-F]+', line)
-            elif sort == 'binary':
-                numberMatch = re.search(r'[01]+', line)
-
-            if numberMatch is None:
-                obj.append(NumberSortContainerHelper(line, 0, sort))
+            if number_match is None:
+                containers.append(NumberSortContainerHelper(line, 0, sort))
             else:
-                obj.append(NumberSortContainerHelper(line, numberMatch.group(), sort))
+                containers.append(NumberSortContainerHelper(line, number_match.group(), sort))
 
-        obj.sort(key=lambda x: x.getNumber(), reverse=self.reversed)
+        containers.sort(key=lambda x: x.getNumber(), reverse=self.reversed)
 
-        for line in obj:
+        for line in containers:
             sorted_lines.append(line.getLine())
 
-        self.writeToView(region, sorted_lines)
+        self.write_to_view(region, sorted_lines)
 
-    def sortStructures(self, region, lines, sort):
+    def extract_line(self, line, sort):
+        if sort == 'decimal':
+            return re.search(r'[+-]?\d+(?:\.\d+)?', line)
+        elif sort == 'octal':
+            return re.search(r'[0-7]+', line)
+        elif sort == 'hexadecimal':
+            return re.search(r'(?:0[xX])?[0-9a-fA-F]+', line)
+        elif sort == 'binary':
+            return re.search(r'[01]+', line)
+        else:
+            return None
+
+    def sort_structures(self, region, lines, sort):
         """
         Sort the first structure of each line, contained in the region
         :param region: The region
@@ -131,17 +136,17 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         if sort == 'semver':
             for line in lines:
                 # The regex come from : https://semver.org/
-                semVerMatch = re.search(r'(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)'
-                                        r'(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
-                                        r'(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))'
-                                        r'?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?', line)
+                sem_ver_match = re.search(r'(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)'
+                                          r'(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)'
+                                          r'(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))'
+                                          r'?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?', line)
 
-                if semVerMatch is None:
+                if sem_ver_match is None:
                     lines_to_sort.append(ContainerHelper(line, "0.0.0"))
                 else:
-                    major = semVerMatch.group('major')
-                    minor = semVerMatch.group('minor')
-                    patch = semVerMatch.group('patch')
+                    major = sem_ver_match.group('major')
+                    minor = sem_ver_match.group('minor')
+                    patch = sem_ver_match.group('patch')
                     version = "{major}.{minor}.{patch}".format(major=major, minor=minor, patch=patch)
                     lines_to_sort.append(ContainerHelper(line, version))
 
@@ -151,9 +156,9 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         for line in lines_to_sort:
             sorted_lines.append(line.getLine())
 
-        self.writeToView(region, sorted_lines)
+        self.write_to_view(region, sorted_lines)
 
-    def sortStrings(self, region, lines, sort):
+    def sort_strings(self, region, lines, sort):
         """
         Sort the strings / lines, contained in the region
         :param region: The region
@@ -163,16 +168,21 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
         sorted_lines = None
 
         if sort == 'length':
-            if self.settings.get('length_alphabetically_enabled'):
+            subsort_length = self.settings.get('subsort_length_of_line')
+            if subsort_length is None:
+                sorted_lines = sorted(lines, key=lambda current_str: len(current_str), reverse=self.reversed)
+            elif SortType.is_alphabetically_sort(subsort_length):
                 sorted_lines = defaultdict(list)
 
                 # Put all values in a defaultdict (Grouped by length)
                 for value in sorted(lines, key=lambda current_str: len(current_str)):
                     sorted_lines[len(value)].append(value)
 
+                is_descending = SortType.is_alphabetically_descending(subsort_length)
+
                 # Sort the groups alphabetically
                 for index, values in sorted_lines.items():
-                    sorted_lines[index] = sorted(values, reverse=self.settings.get('length_alphabetically_reversed'))
+                    sorted_lines[index] = sorted(values, reverse=is_descending)
 
                 # Sort the groups by length
                 sorted_lines = sorted(sorted_lines.items(), key=lambda t: t[0], reverse=self.reversed)
@@ -182,22 +192,18 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                     for value in values:
                         tempContainer.append(value)
                 sorted_lines = tempContainer
-            else:
-                sorted_lines = sorted(lines, key=lambda current_str: len(current_str), reverse=self.reversed)
-
-        elif sort == 'string':
-            if self.settings.get('case_sensitive'):
+        elif sort == 'alphabetically':
+            if self.settings.get('alphabetically_case_sensitive'):
                 sorted_lines = sorted(lines, reverse=self.reversed)
             else:
                 sorted_lines = sorted(lines, key=lambda current_string: current_string.lower(), reverse=self.reversed)
-
-        elif sort == 'naturalOrder':
+        elif sort == 'natural_order':
             sorted_lines = natural_sort(lines)
 
         if sorted_lines is not None:
-            self.writeToView(region, sorted_lines)
+            self.write_to_view(region, sorted_lines)
 
-    def writeToView(self, region, sorted_lines):
+    def write_to_view(self, region, sorted_lines):
         """
         Method that write the specified dictionary into the view
         :param region: The selected region
@@ -206,10 +212,10 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
 
         if len(sorted_lines) != 0:
             if self.have_selected_regions_of_text:
-                self.view.replace(self.edit, region, ''.join(putEndLines(sorted_lines)))
+                self.view.replace(self.edit, region, ''.join(put_end_lines(sorted_lines)))
             else:
                 self.view.erase(self.edit, sublime.Region(0, self.view.size()))
-                self.view.insert(self.edit, 0, ''.join(putEndLines(sorted_lines)))
+                self.view.insert(self.edit, 0, ''.join(put_end_lines(sorted_lines)))
         else:
             print("SortBy error: No string found !")
 
@@ -251,9 +257,9 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                     self.apply_sort_from_type(raw_lines, region_to_write, sort)
 
     def apply_sort_from_type(self, raw_lines, region, sort):
-        if sort == 'length' or sort == 'string' or sort == 'naturalOrder':
-            self.sortStrings(region, raw_lines, sort)
+        if sort == 'length' or sort == 'alphabetically' or sort == 'natural_order':
+            self.sort_strings(region, raw_lines, sort)
         elif sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-            self.sortNumbers(region, raw_lines, sort)
+            self.sort_numbers(region, raw_lines, sort)
         elif sort == 'semver':
-            self.sortStructures(region, raw_lines, sort)
+            self.sort_structures(region, raw_lines, sort)

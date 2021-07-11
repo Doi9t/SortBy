@@ -6,7 +6,7 @@
     ],
     "command": "srtbyli",
     "args": {
-      "sort": "naturalOrder",
+      "sort": "natural_order",
       "reversed": false
     }
   },
@@ -39,7 +39,7 @@
     ],
     "command": "srtbyli",
     "args": {
-      "sort": "string",
+      "sort": "alphabetically",
       "reversed": false
     }
   },
@@ -50,7 +50,7 @@
     ],
     "command": "srtbyli",
     "args": {
-      "sort": "string",
+      "sort": "alphabetically",
       "reversed": true
     }
   },
