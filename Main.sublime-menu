@@ -54,6 +54,14 @@
                       "sort": "natural_order",
                       "reversed": false
                     }
+                  },
+                  {
+                    "caption": "SortBy: Natural order (Descending)",
+                    "command": "srtbyli",
+                    "args": {
+                      "sort": "natural_order",
+                      "reversed": true
+                    }
                   }
                 ]
               },
@@ -66,6 +74,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "binary",
+                      "regex": "[01]+",
                       "reversed": false
                     }
                   },
@@ -74,6 +83,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "binary",
+                      "regex": "[01]+",
                       "reversed": true
                     }
                   },
@@ -82,6 +92,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "hexadecimal",
+                      "regex": "(?:0[xX])?[0-9a-fA-F]+",
                       "reversed": false
                     }
                   },
@@ -90,6 +101,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "hexadecimal",
+                      "regex": "(?:0[xX])?[0-9a-fA-F]+",
                       "reversed": true
                     }
                   },
@@ -98,6 +110,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "decimal",
+                      "regex": "[+-]?\\d+(?:\\.\\d+)?",
                       "reversed": false
                     }
                   },
@@ -106,6 +119,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "decimal",
+                      "regex": "[+-]?\\d+(?:\\.\\d+)?",
                       "reversed": true
                     }
                   },
@@ -114,6 +128,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "octal",
+                      "regex": "[0-7]+",
                       "reversed": false
                     }
                   },
@@ -122,6 +137,7 @@
                     "command": "srtbyli",
                     "args": {
                       "sort": "octal",
+                      "regex": "[0-7]+",
                       "reversed": true
                     }
                   }
@@ -148,6 +164,10 @@
                     }
                   }
                 ]
+              },
+              {
+                "caption": "SortBy: Regular expression",
+                "command": "srtbyre"
               }
             ]
           }
