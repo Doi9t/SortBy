@@ -3,13 +3,14 @@
 - - -
 
 ## Feature matrix
-| Features                                   | ST 2 | ST 3 | ST 4 |
-|:------------------------------------------:|:----:|:----:|:----:|
-| Natural order                              | x    | x    | x    |
-| [Semantic Versioning](https://semver.org/) |      | x    | x    |
-| Sort by the length of lines                | x    | x    | x    |
-| Sort lines of text alphabetically          | x    | x    | x    |
-| Sort numbers numerically                   | x    | x    | x    |
+| Features                                   | ST2  | ST3  | ST4  | Description                                                                                                                                                              | 
+|:------------------------------------------:|:----:|:----:|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Natural order                              | x    | x    | x    | Sort the lines using the natural order, you can read more in an excellent article by [Jeff Atwood](https://blog.codinghorror.com/sorting-for-humans-natural-sort-order/).|
+| Sort by the length of lines                | x    | x    | x    |                                                                                                                                                                          |
+| Sort lines of text alphabetically          | x    | x    | x    |                                                                                                                                                                          |
+| Sort numbers numerically                   | x    | x    | x    |                                                                                                                                                                          |
+| [Semantic Versioning](https://semver.org/) |      | x    | x    | Sort Semantic Versions, not supporting pre-releases / build metadata at the moment.                                                                                      |
+| Regular expression                         |      | x    | x    | Sort the lines using a regex, to find the component and choose a subsort for the line.                                                                                   | 
 
 You can check the [backward-incompatible-changes](./backward-incompatible-changes.md) file to see if you need to do something to keep your current settings / workflow.
 
