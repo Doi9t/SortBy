@@ -21,16 +21,8 @@ import sublime_plugin
 class SrtbyreCommand(sublime_plugin.TextCommand):
     def run(self, edit, regex, available_sort):
 
-        command_options = {
-            "selection_regex": regex,
-            "selected_sort": available_sort
-        }
-
-        print(command_options)
-        # view.run_command(
-        #     'show_overlay',
-        #     {'overlay': 'command_palette', 'command': 'srtbyli', 'args': available_sort},
-        # )
+        available_sort["regex"] = regex
+        self.view.run_command('srtbyli', available_sort)
 
     def input(self, args):
         for name in ["regex", "available_sort"]:
@@ -49,7 +41,7 @@ class RegexInputHandler(sublime_plugin.TextInputHandler):
         return self._name
 
     def placeholder(self):
-        return "Regex that will be used"
+        return "Regex for each lines"
 
     def validate(self, text):
         try:
