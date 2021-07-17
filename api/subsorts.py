@@ -12,12 +12,12 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-class SortType:
+class SubSorts:
     ALPHABETICALLY = "ALPHABETICALLY"
     ALPHABETICALLY_DESCENDING = "ALPHABETICALLY_DESCENDING"
 
-    def is_alphabetically_sort(sort_type: str) -> bool:
-        return sort_type.upper() == SortType.ALPHABETICALLY or sort_type.upper() == SortType.ALPHABETICALLY_DESCENDING
+    def is_alphabetically_sort(self, sort_type: str) -> bool:
+        return sort_type.upper() == SubSorts.ALPHABETICALLY or sort_type.upper() == SubSorts.ALPHABETICALLY_DESCENDING
 
-    def is_alphabetically_descending(sort_type: str) -> bool:
-        return sort_type.upper() == SortType.ALPHABETICALLY_DESCENDING
+    def is_alphabetically_descending(self, sort_type: str) -> bool:
+        return sort_type.upper() == SubSorts.ALPHABETICALLY_DESCENDING

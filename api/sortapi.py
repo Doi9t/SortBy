@@ -15,7 +15,7 @@
 import re
 from collections import defaultdict
 
-from .sorttype import SortType
+from .subsorts import SubSorts
 
 bases = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
 
@@ -32,7 +32,7 @@ class SortSettings(object):
         self.subsort_length_of_line = subsort_length_of_line
 
 
-class ContainerHelper(object):
+class _ContainerHelper(object):
     """
     An object that contains the selected value & full line.
     """
@@ -48,7 +48,7 @@ class ContainerHelper(object):
         return self.value
 
 
-class NumberSortContainerHelper(ContainerHelper):
+class _NumberSortContainerHelper(_ContainerHelper):
     """
     An object that contains the number & full line.
     """
@@ -68,8 +68,9 @@ class NumberSortContainerHelper(ContainerHelper):
             else:
                 return int(number, current_base)
 
+
 class SortApi:
-    def sort_numbers(self, mapped_regex_lines, sort, reversed, regex):
+    def __sort_numbers(self, mapped_regex_lines, sort, reversed, regex):
         """
         Sort the first number of each line, contained in the region
         :param regex: The selector for the number
@@ -91,9 +92,9 @@ class SortApi:
             number_match = re.search(regex, group)
 
             if number_match is None:
-                containers.append(NumberSortContainerHelper(full_line, 0, sort))
+                containers.append(_NumberSortContainerHelper(full_line, 0, sort))
             else:
-                containers.append(NumberSortContainerHelper(full_line, number_match.group(), sort))
+                containers.append(_NumberSortContainerHelper(full_line, number_match.group(), sort))
 
         containers.sort(key=lambda x: x.getNumber(), reverse=reversed)
 
@@ -102,7 +103,7 @@ class SortApi:
 
         return sorted_lines
 
-    def natural_sort(self, mapped_regex_lines, reversed=False):
+    def __natural_sort(self, mapped_regex_lines, reversed=False):
         """
         Sort the specified list, with the natural sort.
 
@@ -116,7 +117,7 @@ class SortApi:
         return sorted(mapped_regex_lines, key=lambda key: [convertion(g) for g in re.split('([0-9]+)', key.value)],
                       reverse=reversed)
 
-    def sort_structures(self, mapped_regex_lines, sort, reversed):
+    def __sort_structures(self, mapped_regex_lines, sort, reversed):
         """
         Sort the first structure of each line, contained in the region
         :param mapped_regex_lines: The unsorted lines, contained into a ContainerHelper (value = found regex group)
@@ -139,13 +140,13 @@ class SortApi:
                                           r'?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?', group)
 
                 if sem_ver_match is None:
-                    lines_to_sort.append(ContainerHelper(group, "0.0.0"))
+                    lines_to_sort.append(_ContainerHelper(group, "0.0.0"))
                 else:
                     major = sem_ver_match.group('major')
                     minor = sem_ver_match.group('minor')
                     patch = sem_ver_match.group('patch')
                     version = "{major}.{minor}.{patch}".format(major=major, minor=minor, patch=patch)
-                    lines_to_sort.append(ContainerHelper(full_line, version))
+                    lines_to_sort.append(_ContainerHelper(full_line, version))
 
             # Thanks to @eli-bendersky https://stackoverflow.com/a/2574090
             lines_to_sort.sort(key=lambda x: list(map(int, x.value.split('.'))), reverse=reversed)
@@ -155,7 +156,7 @@ class SortApi:
 
         return sorted_lines
 
-    def sort_strings(self, mapped_regex_lines, sort, reversed, settings):
+    def __sort_strings(self, mapped_regex_lines, sort, reversed, settings):
         """
         Sort the strings / lines, contained in the region
         :param mapped_regex_lines: The unsorted lines
@@ -169,21 +170,17 @@ class SortApi:
         if sort == 'length':
             subsort_length_of_line = settings.subsort_length_of_line
 
-            print(subsort_length_of_line)
-
             if subsort_length_of_line is None:
                 sorted_mapped_regex_line = \
                     sorted(mapped_regex_lines, key=lambda current_str: len(current_str.value), reverse=reversed)
-            elif SortType.is_alphabetically_sort(subsort_length_of_line):
+            elif SubSorts.is_alphabetically_sort(subsort_length_of_line):
                 sorted_mapped_regex_line = defaultdict(list)
 
                 # Put all values in a defaultdict (Grouped by length)
                 for value in sorted(mapped_regex_lines, key=lambda current_str: len(current_str.value)):
                     sorted_mapped_regex_line[len(value.value)].append(value)
 
-                is_descending = SortType.is_alphabetically_descending(subsort_length_of_line)
-
-                print(is_descending)
+                is_descending = SubSorts.is_alphabetically_descending(subsort_length_of_line)
 
                 # Sort the groups alphabetically
                 for index, values in sorted_mapped_regex_line.items():
@@ -208,7 +205,7 @@ class SortApi:
                     sorted(mapped_regex_lines, key=lambda current_string: current_string.value.lower(),
                            reverse=reversed)
         elif sort == 'natural_order':
-            sorted_mapped_regex_line = self.natural_sort(mapped_regex_lines, reversed)
+            sorted_mapped_regex_line = self.__natural_sort(mapped_regex_lines, reversed)
 
         if sorted_mapped_regex_line is not None:
             for current_line in sorted_mapped_regex_line:
@@ -225,18 +222,18 @@ class SortApi:
         :param sort_settings: The settings
         """
 
-        mapped_regex_lines = self.map_regex_matches_with_lines(raw_lines, regex)
+        mapped_regex_lines = self.__map_regex_matches_with_lines(raw_lines, regex)
 
         if sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
-            return self.sort_numbers(mapped_regex_lines, sort, reversed, regex)
+            return self.__sort_numbers(mapped_regex_lines, sort, reversed, regex)
         elif sort == 'length' or sort == 'alphabetically' or sort == 'natural_order':
-            return self.sort_strings(mapped_regex_lines, sort, reversed, sort_settings)
+            return self.__sort_strings(mapped_regex_lines, sort, reversed, sort_settings)
         elif sort == 'semver':
-            return self.sort_structures(mapped_regex_lines, sort, reversed)
+            return self.__sort_structures(mapped_regex_lines, sort, reversed)
         else:
             return []
 
-    def map_regex_matches_with_lines(self, raw_lines, regex):
+    def __map_regex_matches_with_lines(self, raw_lines, regex):
         """
         Map the raw line with the regex group, if present, or the raw line if not.
         :param raw_lines: The unsorted lines
@@ -248,14 +245,14 @@ class SortApi:
 
         for line in raw_lines:
             if regex is None:  # No regex
-                values.append(ContainerHelper(line, line))
+                values.append(_ContainerHelper(line, line))
                 continue
 
             match = re.search(regex, line)
 
             if match is None:
-                values.append(ContainerHelper(line, line))
+                values.append(_ContainerHelper(line, line))
             else:
-                values.append(ContainerHelper(line, match.group()))
+                values.append(_ContainerHelper(line, match.group()))
 
         return values

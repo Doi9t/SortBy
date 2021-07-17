@@ -15,7 +15,7 @@
 import sublime
 import sublime_plugin
 
-from .sortapi import SortSettings, SortApi
+from .api.sortapi import SortSettings, SortApi
 
 
 class SrtbyliCommand(sublime_plugin.TextCommand):
