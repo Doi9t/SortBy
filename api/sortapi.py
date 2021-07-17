@@ -17,7 +17,7 @@ from collections import defaultdict
 
 from .subsorts import SubSorts
 
-bases = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
+BASE_OF_NUMBERS = {'binary': 2, 'octal': 8, 'decimal': 10, 'hexadecimal': 16}
 
 
 class SortSettings(object):
@@ -62,7 +62,7 @@ class _NumberSortContainerHelper(_ContainerHelper):
         if number == 0:
             return 0
         else:
-            current_base = bases[self.base]
+            current_base = BASE_OF_NUMBERS[self.base]
             if current_base == 10:
                 return float(number)
             else:
@@ -83,7 +83,20 @@ class SortApi:
         containers = []
 
         if regex is None:
-            return
+            if sort == "binary":
+                # language=PythonRegExp
+                regex = "[01]+"
+            elif sort == "octal":
+                # language=PythonRegExp
+                regex = "[0-7]+"
+            elif sort == "hexadecimal":
+                # language=PythonRegExp
+                regex = "(?:0[xX])?[0-9a-fA-F]+"
+            elif sort == "decimal":
+                # language=PythonRegExp
+                regex = "[+-]?\d+(?:\.\d+)?"
+            else:
+                return sorted_lines
 
         for containerHelperRegex in mapped_regex_lines:
             full_line = containerHelperRegex.line
@@ -185,7 +198,7 @@ class SortApi:
                 # Sort the groups alphabetically
                 for index, values in sorted_mapped_regex_line.items():
                     sorted_mapped_regex_line[index] = \
-                        sorted(values, key=lambda current_str: len(current_str.value), reverse=is_descending)
+                        sorted(values, key=lambda current_str: current_str.value, reverse=is_descending)
 
                 # Sort the groups by length
                 sorted_mapped_regex_line = \
