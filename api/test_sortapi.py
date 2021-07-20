@@ -130,6 +130,55 @@ class TestSortApi(TestCase):
         # then
         self.assertEqual(array_to_assert, ["1", "1", "11", "aaa", "111111", "111111111", "11111111111"])
 
+    def test_sort_lines_length_with_tabs(self):
+        # given
+        sort_api = SortApi()
+        given_lines = ["\t\t\t\t\t\t1",
+                       "\t\t\t11111111111",
+                       "\taaa",
+                       "\t\t111111111",
+                       "\t1",
+                       "\t\t111111",
+                       "11\t\t"]
+
+        given_sort_settings = SortSettings(False, False, None)
+
+        # when
+        array_to_assert = sort_api.sort_lines(given_lines, Sort.LENGTH, None, False, given_sort_settings)
+
+        # then
+        self.assertEqual(array_to_assert, ["\t\t\t\t\t\t1",
+                                           "\t1",
+                                           "\taaa",
+                                           "11\t\t",
+                                           "\t\t111111",
+                                           "\t\t111111111",
+                                           "\t\t\t11111111111"])
+
+    def test_sort_lines_length_with_spaces(self):
+        # given
+        sort_api = SortApi()
+        given_lines = ["          1",
+                       "   11111111111",
+                       "aaa",
+                       "  111111111",
+                       " 1               ",
+                       "  111111",
+                       "  11"]
+        given_sort_settings = SortSettings(False, False, None)
+
+        # when
+        array_to_assert = sort_api.sort_lines(given_lines, Sort.LENGTH, None, False, given_sort_settings)
+
+        # then
+        self.assertEqual(array_to_assert, ["          1",
+                                           "  11",
+                                           "aaa",
+                                           "  111111",
+                                           "  111111111",
+                                           "   11111111111",
+                                           " 1               "])
+
     def test_sort_lines_length_reversed(self):
         # given
         sort_api = SortApi()

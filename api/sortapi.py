@@ -38,7 +38,7 @@ class _ContainerHelper(object):
     """
 
     def __init__(self, line, value):
-        self.line = str(line).strip()
+        self.line = line
         self.value = value
 
     def getLine(self):
@@ -185,12 +185,13 @@ class SortApi:
 
             if subsort_length_of_line is None:
                 sorted_mapped_regex_line = \
-                    sorted(mapped_regex_lines, key=lambda current_str: len(current_str.value), reverse=reversed)
+                    sorted(mapped_regex_lines, key=lambda current_str: len(str(current_str.value).lstrip()),
+                           reverse=reversed)
             elif SubSorts.is_alphabetically_sort(subsort_length_of_line):
                 sorted_mapped_regex_line = defaultdict(list)
 
                 # Put all values in a defaultdict (Grouped by length)
-                for value in sorted(mapped_regex_lines, key=lambda current_str: len(current_str.value)):
+                for value in sorted(mapped_regex_lines, key=lambda current_str: len(str(current_str.value).lstrip())):
                     sorted_mapped_regex_line[len(value.value)].append(value)
 
                 is_descending = SubSorts.is_alphabetically_descending(subsort_length_of_line)
