@@ -227,16 +227,26 @@ class SortApi:
 
         return sorted_lines
 
-    def sort_lines(self, raw_lines, sort, regex, reversed, sort_settings):
+    def sort_lines(self, raw_lines, sort, regex_obj, reversed, sort_settings):
         """
         :param raw_lines: The raw lines
         :param sort: The selector for the number
-        :param regex: The regex for the slection
+        :param regex_obj: The regex object
         :param reversed: Is the reversed order
         :param sort_settings: The settings
         """
 
-        mapped_regex_lines = self.__map_regex_matches_with_lines(raw_lines, regex)
+        regex = None
+        regex_group = 0
+
+        if regex_obj is not None:
+            regex = regex_obj["regex"]
+            try:
+                regex_group = int(regex_obj["group"])
+            except ValueError:
+                regex_group = 0
+
+        mapped_regex_lines = self.__map_regex_matches_with_lines(raw_lines, regex, regex_group)
 
         if sort == 'decimal' or sort == 'octal' or sort == 'hexadecimal' or sort == 'binary':
             return self.__sort_numbers(mapped_regex_lines, sort, reversed, regex)
@@ -247,11 +257,12 @@ class SortApi:
         else:
             return []
 
-    def __map_regex_matches_with_lines(self, raw_lines, regex):
+    def __map_regex_matches_with_lines(self, raw_lines, regex, regex_group):
         """
         Map the raw line with the regex group, if present, or the raw line if not.
         :param raw_lines: The unsorted lines
-        :param regex: The regex
+        :param regex: The regex used to select one or more sections of a line
+        :param regex_group: The group that select the section of a line
         :return:
         """
 
@@ -262,11 +273,11 @@ class SortApi:
                 values.append(_ContainerHelper(line, line))
                 continue
 
-            match = re.search(regex, line)
+            match = re.findall(regex, line)
 
-            if match is None:
+            if match is None or len(match) == 0 or regex_group >= len(match):
                 values.append(_ContainerHelper(line, line))
             else:
-                values.append(_ContainerHelper(line, match.group()))
+                values.append(_ContainerHelper(line, match[regex_group]))
 
         return values

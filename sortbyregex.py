@@ -19,16 +19,22 @@ import sublime_plugin
 
 
 class SrtbyreCommand(sublime_plugin.TextCommand):
-    def run(self, edit, regex, available_sort):
+    def run(self, edit, regex, regex_group, available_sort):
 
-        available_sort["regex"] = regex
+        available_sort["regex"] = {
+            "regex": regex,
+            "group": regex_group,
+        }
+
         self.view.run_command('srtbyli', available_sort)
 
     def input(self, args):
-        for name in ["regex", "available_sort"]:
+        for name in ["regex", "regex_group", "available_sort"]:
             if name not in args:
                 if name is "regex":
                     return RegexInputHandler(name)
+                elif name is "regex_group":
+                    return RegexGroupInputHandler(name)
                 elif name is "available_sort":
                     return AvailableSortInputHandler(name)
 
@@ -41,13 +47,33 @@ class RegexInputHandler(sublime_plugin.TextInputHandler):
         return self._name
 
     def placeholder(self):
-        return "Regex for each lines"
+        return "Python RegEx"
 
     def validate(self, text):
         try:
             re.compile(text)
             return True
         except re.error:
+            return False
+
+
+class RegexGroupInputHandler(sublime_plugin.TextInputHandler):
+    def __init__(self, name):
+        self._name = name
+
+    def name(self):
+        return self._name
+
+    def placeholder(self):
+        return "Regex group (Starting at ZERO)"
+
+    def validate(self, text):
+        try:
+            if int(text) < 0:
+                return False
+            else:
+                return True
+        except ValueError:
             return False
 
 

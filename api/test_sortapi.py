@@ -69,15 +69,23 @@ class TestSortApi(TestCase):
         # then
         self.assertEqual(array_to_assert, ["habitat", "guitars", "filling", "eternal", "Figures", "Ethical", "EStonia"])
 
-    def test_sort_lines_alphabetically_regex(self):
+    def test_sort_lines_alphabetically_regex_first_group(self):
         # given
         sort_api = SortApi()
 
         # language=PythonRegExp
-        given_regex = "^|[a-zA-Z0-9]*$"
+        given_regex = {
+            "regex": "[0-9]+",
+            "group": 0
+        }
 
-        given_lines = ["yorkshire|0", "shadow|10", "manual|abstract", "additions|additions", "abstract|manual",
-                       "10|shadow", "0|yorkshire"]
+        given_lines = ["4|shadow|f|2",
+                       "0|yorkshire|6",
+                       "6|additions|additions|0",
+                       "yorkshire|1|5",
+                       "shadow|2|4",
+                       "abstract|3|manual|3",
+                       "manual|5|abstract|c|1"]
         given_sort_settings = SortSettings(False, False, None)
 
         # when
@@ -85,8 +93,64 @@ class TestSortApi(TestCase):
 
         # then
         self.assertEqual(array_to_assert,  # Sorted after the pipe
-                         ["yorkshire|0", "shadow|10", "manual|abstract", "additions|additions", "abstract|manual",
-                          "10|shadow", "0|yorkshire"])
+                         ["0|yorkshire|6",
+                          "yorkshire|1|5",
+                          "shadow|2|4",
+                          "abstract|3|manual|3",
+                          "4|shadow|f|2",
+                          "manual|5|abstract|c|1",
+                          "6|additions|additions|0"])
+
+    def test_sort_lines_alphabetically_regex_second_group(self):
+        # given
+        sort_api = SortApi()
+
+        # language=PythonRegExp
+        given_regex = {
+            "regex": "[0-9]+",
+            "group": 1
+        }
+
+        given_lines = ["0|yorkshire|6",
+                       "yorkshire|1|5",
+                       "shadow|2|4",
+                       "abstract|3|manual|3",
+                       "4|shadow|f|2",
+                       "manual|5|abstract|c|1",
+                       "6|additions|additions|0"]
+        given_sort_settings = SortSettings(False, False, None)
+
+        # when
+        array_to_assert = sort_api.sort_lines(given_lines, Sort.ALPHABETICALLY, given_regex, False, given_sort_settings)
+
+        # then
+        self.assertEqual(array_to_assert,  # Sorted after the pipe
+                         ["6|additions|additions|0",
+                          "manual|5|abstract|c|1",
+                          "4|shadow|f|2",
+                          "abstract|3|manual|3",
+                          "shadow|2|4",
+                          "yorkshire|1|5",
+                          "0|yorkshire|6"])
+
+    def test_sort_lines_alphabetically_regex_group_overflow(self):
+        # given
+        sort_api = SortApi()
+
+        # language=PythonRegExp
+        given_regex = {
+            "regex": "[0-9]+",
+            "group": 10
+        }
+
+        given_lines = ["yorkshire|0|2"]
+        given_sort_settings = SortSettings(False, False, None)
+
+        # when
+        array_to_assert = sort_api.sort_lines(given_lines, Sort.ALPHABETICALLY, given_regex, False, given_sort_settings)
+
+        # then
+        self.assertEqual(array_to_assert, ["yorkshire|0|2"])
 
     def test_sort_lines_natural_order(self):
         # given
