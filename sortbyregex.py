@@ -57,10 +57,7 @@ class RegexGroupInputHandler(sublime_plugin.TextInputHandler):
 
     def validate(self, text):
         try:
-            if int(text) < 0:
-                return False
-            else:
-                return True
+            return int(text) >= 0
         except ValueError:
             return False
 
