@@ -31,11 +31,11 @@ class SrtbyreCommand(sublime_plugin.TextCommand):
     def input(self, args):
         for name in ["regex", "regex_group", "available_sort"]:
             if name not in args:
-                if name is "regex":
+                if name == "regex":
                     return RegexInputHandler(name)
-                elif name is "regex_group":
+                elif name == "regex_group":
                     return RegexGroupInputHandler(name)
-                elif name is "available_sort":
+                elif name == "available_sort":
                     return AvailableSortInputHandler(name)
 
 
