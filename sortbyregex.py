@@ -86,7 +86,7 @@ class AvailableSortInputHandler(sublime_plugin.ListInputHandler):
     def extract_command(self, command, name):
         try:
             return command[name]
-        except:
+        except KeyError:
             return None
 
     def placeholder(self):
