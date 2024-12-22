@@ -29,23 +29,17 @@ class SrtbyreCommand(sublime_plugin.TextCommand):
         self.view.run_command('srtbyli', available_sort)
 
     def input(self, args):
-        for name in ["regex", "regex_group", "available_sort"]:
-            if name not in args:
-                if name is "regex":
-                    return RegexInputHandler(name)
-                elif name is "regex_group":
-                    return RegexGroupInputHandler(name)
-                elif name is "available_sort":
-                    return AvailableSortInputHandler(name)
+        if "regex" not in args:
+            return RegexInputHandler()
+        elif "regex_group" not in args:
+            return RegexGroupInputHandler()
+        elif "available_sort" not in args:
+            return AvailableSortInputHandler()
+        else:
+            return None
 
 
 class RegexInputHandler(sublime_plugin.TextInputHandler):
-    def __init__(self, name):
-        self._name = name
-
-    def name(self):
-        return self._name
-
     def placeholder(self):
         return "Python RegEx"
 
@@ -58,29 +52,17 @@ class RegexInputHandler(sublime_plugin.TextInputHandler):
 
 
 class RegexGroupInputHandler(sublime_plugin.TextInputHandler):
-    def __init__(self, name):
-        self._name = name
-
-    def name(self):
-        return self._name
-
     def placeholder(self):
         return "Regex group (Starting at ZERO)"
 
     def validate(self, text):
         try:
-            if int(text) < 0:
-                return False
-            else:
-                return True
+            return int(text) >= 0
         except ValueError:
             return False
 
 
 class AvailableSortInputHandler(sublime_plugin.ListInputHandler):
-    def __init__(self, name):
-        self._name = name
-
     def list_items(self):
         current_commands = json.loads(sublime.load_resource('Packages/SortBy/Commands.sublime-commands'))
         values = []
@@ -101,7 +83,7 @@ class AvailableSortInputHandler(sublime_plugin.ListInputHandler):
     def extract_command(self, command, name):
         try:
             return command[name]
-        except:
+        except KeyError:
             return None
 
     def placeholder(self):
