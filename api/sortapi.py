@@ -85,16 +85,16 @@ class SortApi:
         if regex is None:
             if sort == "binary":
                 # language=PythonRegExp
-                regex = "[01]+"
+                regex = r"[01]+"
             elif sort == "octal":
                 # language=PythonRegExp
-                regex = "[0-7]+"
+                regex = r"[0-7]+"
             elif sort == "hexadecimal":
                 # language=PythonRegExp
-                regex = "(?:0[xX])?[0-9a-fA-F]+"
+                regex = r"(?:0[xX])?[0-9a-fA-F]+"
             elif sort == "decimal":
                 # language=PythonRegExp
-                regex = "[+-]?\d+(?:\.\d+)?"
+                regex = r"[+-]?\d+(?:\.\d+)?"
             else:
                 return sorted_lines
 
