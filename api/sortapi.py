@@ -27,8 +27,8 @@ class SortSettings(object):
 
     def __init__(self, alphabetically_case_sensitive, handle_selected_part_of_line_as_full_selected_line,
                  subsort_length_of_line):
-        self.alphabetically_case_sensitive = alphabetically_case_sensitive,
-        self.handle_selected_part_of_line_as_full_selected_line = handle_selected_part_of_line_as_full_selected_line,
+        self.alphabetically_case_sensitive = alphabetically_case_sensitive
+        self.handle_selected_part_of_line_as_full_selected_line = handle_selected_part_of_line_as_full_selected_line
         self.subsort_length_of_line = subsort_length_of_line
 
 

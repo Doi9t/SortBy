@@ -31,7 +31,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                                      settings.get("handle_selected_part_of_line_as_full_selected_line"),
                                      settings.get("subsort_length_of_line"))
 
-        if selection is None or len(selection) == 0:  # Just is case
+        if selection is None or len(selection) == 0:
             print("SortBy error: No selection found !")
             return
 
@@ -47,7 +47,7 @@ class SrtbyliCommand(sublime_plugin.TextCommand):
                     continue
                 else:
                     region_to_write = None
-                    if settings.get('handle_selected_part_of_line_as_full_selected_line'):
+                    if settings.handle_selected_part_of_line_as_full_selected_line:
                         regions = view.lines(region)
                         first = regions[0]
                         last_region = regions[-1]

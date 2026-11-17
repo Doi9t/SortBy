@@ -420,3 +420,13 @@ class TestSortApi(TestCase):
 
         # then
         self.assertEqual(array_to_assert, ["2.2.1", "2.0.9", "2.0.1", "1.2.2", "1.1.1", "0.12.1"])
+
+
+    def test_configuration_types(self):
+        # given
+        given_sort_settings = SortSettings(False, False, False)
+
+        # when
+        assert isinstance(given_sort_settings.alphabetically_case_sensitive, bool)
+        assert isinstance(given_sort_settings.handle_selected_part_of_line_as_full_selected_line, bool)
+        assert isinstance(given_sort_settings.subsort_length_of_line, bool)
